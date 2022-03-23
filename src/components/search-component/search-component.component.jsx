@@ -7,15 +7,15 @@ const SearchComponent = () => {
             <img alt='' className="background-image" src={bgimg} />
             <form className='search-content'>
                 <div className="search-from">
-                    <h2>From</h2>
+                    <h2>FROM</h2>
                     <input className='form-input' type="text" />
                 </div>
                 <div className="search-to">
-                    <h2>To</h2>
+                    <h2>TO</h2>
                     <input className='form-input' type="text" />
                 </div>
                 <div className="search-date">
-                    <h2>Date</h2>
+                    <h2>DATE</h2>
                     <input className='form-input' type="date" />
                 </div>
                 <div className="search-button">
