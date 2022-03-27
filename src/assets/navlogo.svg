@@ -1,10 +1,10 @@
-<svg width="70" height="50" xmlns="http://www.w3.org/2000/svg">
+<svg width="80" height="50" xmlns="http://www.w3.org/2000/svg">
  <g id="Layer_1">
   <title>Layer 1</title>
   <text transform="matrix(1.6589, 0, 0, 1.61067, -4.26752, -22.8167)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_6" y="32.90697" x="4.81864" stroke-width="0" fill="#ffffff">C</text>
   <text transform="matrix(1.7179, 0, 0, 1.65757, -8.98912, 5.18321)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_7" y="25.60121" x="12.74392" stroke-width="0" fill="#ffffff">O</text>
   <text transform="matrix(0.523198, 0, 0, 0.496233, 1.5496, 1.74493)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_8" y="35.70661" x="19.97405" stroke-width="0" fill="#ffffff">osmos</text>
-  <text transform="matrix(0.462619, 0, 0, 0.438852, -18.2971, 2.37336)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_9" y="99.59264" x="120.99735" stroke-width="0" fill="#ffffff">dyssey</text>
+  <text transform="matrix(0.59519, 0, 0, 0.537506, -34.2303, -9.92327)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_9" y="105.7895" x="122.46747" stroke-width="0" fill="#ffffff">dyssey</text>
   <line id="svg_11" y2="36.625" x2="50.375" y1="8.125" x1="55.5" fill="none"/>
   <line id="svg_12" y2="24" x2="35" y1="26" x1="53.75" fill="none"/>
  </g>
