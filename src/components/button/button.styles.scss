@@ -21,7 +21,7 @@
     align-items: center;
 
     &:hover{
-    background-color: rgba(128, 0, 128, 0.671);
+        background-color: rgba(128, 0, 128, 0.671);
         color: white;
         border: 2px solid black;
     }
@@ -29,10 +29,11 @@
     &.google-sign-in{
         background-color: #4285f4;
         color: white;
+        border: 2px solid black;
 
         &:hover{
             background-color: #357ae8;
-            border: none;
+            border: 3px solid black;
         }
     }
 
