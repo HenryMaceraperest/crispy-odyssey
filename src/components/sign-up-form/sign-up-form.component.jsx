@@ -31,10 +31,10 @@ const SignUpForm = () => {
         }
         try {
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
-            resetFormFields();
 
             await createUserDocumentFromAuth(user, { displayName });
 
+            resetFormFields();
 
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

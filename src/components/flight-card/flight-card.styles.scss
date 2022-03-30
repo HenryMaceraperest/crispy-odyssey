@@ -1,0 +1,21 @@
+.flight-card-container{
+    width: 80vw;
+    border: 1px solid white;
+    margin: 3vh 10vw;
+    color: white;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+
+    .view-text{
+        font-size: 25px;
+        margin-left: 10vw;
+    }
+
+    &:hover{
+        cursor: pointer;
+        background-color: purple;
+    }
+}
