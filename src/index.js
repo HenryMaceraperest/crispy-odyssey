@@ -8,13 +8,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './contexts/user.context';
 import { ProductsProvider } from './contexts/product.context';
+import { FooterItemsProvider } from './contexts/footer-items.context';
+import { TimeProvider } from './contexts/time.context';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
         <ProductsProvider>
-          <App />
+          <FooterItemsProvider>
+            <TimeProvider>
+              <App />
+            </TimeProvider>
+          </FooterItemsProvider>
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
