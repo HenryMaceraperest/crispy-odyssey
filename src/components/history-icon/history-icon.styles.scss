@@ -1,0 +1,23 @@
+.history-icon-container{
+    width: 45px;
+    height: 465px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .icon{
+        width: 24px;
+        height: 34px;
+    }
+
+    .item-count{
+        position: absolute;
+        font-size: 12px;
+        font-weight: bold;
+        margin-top: auto;
+        padding-top: 10px;
+        color: white;
+    }
+}

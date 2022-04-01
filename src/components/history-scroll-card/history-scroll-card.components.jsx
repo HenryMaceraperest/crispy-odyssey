@@ -1,8 +1,8 @@
 import React from "react";
 
-import './footer-card.styles.scss';
+import './history-scroll-card.styles.scss';
 
-const FooterCard = ({ item }) => {
+const HistoryScrollCard = ({ item }) => {
     const { from, to, distance,/* startDate, endDate, travelTime,  price */ } = item;
     return (
         <div className="outer-body">
@@ -17,4 +17,4 @@ const FooterCard = ({ item }) => {
     )
 };
 
-export default FooterCard;
+export default HistoryScrollCard;
