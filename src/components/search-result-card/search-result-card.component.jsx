@@ -4,7 +4,7 @@ import { HistoryItemsContext } from '../../contexts/history-items.context';
 import './search-result-card.styles.scss';
 
 const SearchResultCard = ({ flight, from, to, distance }) => {
-    const { company, price, flightStart, flightEnd } = flight;
+    const { id, company, price, flightStart, flightEnd } = flight;
     const start = new Date(flightStart);
     const end = new Date(flightEnd);
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -32,7 +32,7 @@ const SearchResultCard = ({ flight, from, to, distance }) => {
     const { addFlight } = useContext(HistoryItemsContext);
 
     const historyClickHandler = () => {
-        addFlight({ from: from, to: to, distance: distance, startDate: flightStart, endDate: flightEnd, travelTime: travelTime, price: price })
+        addFlight({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: company.name })
     };
 
 
@@ -57,6 +57,10 @@ const SearchResultCard = ({ flight, from, to, distance }) => {
             <div className='card-component'>
                 <label>Total flight time:</label>
                 <p>{travelTime}</p>
+            </div>
+            <div className='card-component'>
+                <label>Distance:</label>
+                <p>{distance}</p>
             </div>
             <div className='card-button'>
                 <button onClick={historyClickHandler}>Book this flight!</button>

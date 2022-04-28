@@ -7,14 +7,14 @@ import { HistoryItemsContext } from '../../contexts/history-items.context';
 
 const HistoryIcon = () => {
 
-    const { isHistoryOpen, setIsHistoryOpen } = useContext(HistoryItemsContext);
+    const { isHistoryOpen, setIsHistoryOpen, historyCount } = useContext(HistoryItemsContext);
 
     const toggleIsHistoryOpen = () => setIsHistoryOpen(!isHistoryOpen);
 
     return (
         <div className='history-icon-container' onClick={toggleIsHistoryOpen}>
             <Icon className='icon' />
-            <span className='item-count'>15</span>
+            <span className='item-count'>{historyCount}</span>
         </div>
     )
 };

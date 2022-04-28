@@ -13,7 +13,7 @@ const FlightCard = ({ flight }) => {
     const { addFlight } = useContext(HistoryItemsContext);
 
     return (
-        <Link to={`/search?from=${from.name}&to=${to.name}`} state={{ from: from.name, to: to.name }} onClick={addFlightToHistory} className='flight-card-container'>
+        <Link to={`/search?from=${from.name}&to=${to.name}`} state={{ from: from.name, to: to.name, distance: distance }} onClick={addFlightToHistory} className='flight-card-container'>
             <DetailLabel mainText="FROM" subText={from.name}></DetailLabel>
             <DetailLabel mainText="TO" subText={to.name}></DetailLabel>
             <DetailLabel mainText="DISTANCE" subText={distance}></DetailLabel>

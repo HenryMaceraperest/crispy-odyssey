@@ -10,6 +10,7 @@ const Search = () => {
     const [flights, setFlights] = useState([]);
     const location = useLocation();
     const search = location.search;
+    const distance = location.state.distance;
 
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
@@ -36,7 +37,7 @@ const Search = () => {
             <h1>From {fromQuery} To {toQuery}</h1>
             <h2>{flights.map(flight => (
 
-                <SearchResultCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />
+                <SearchResultCard key={flight.id} flight={flight} distance={distance} from={fromQuery} to={toQuery} />
 
             ))}</h2>
         </div>

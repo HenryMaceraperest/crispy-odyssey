@@ -11,7 +11,7 @@ const HistoryScroll = () => {
         <Fragment>
             <div className="history-scroll-container">
                 {historyItems.map(item => (
-                    <HistoryScrollCard key={item.distance} item={item} />
+                    <HistoryScrollCard key={item.id} item={item} />
                 ))}
             </div>
         </Fragment>
