@@ -10,6 +10,7 @@ import { UserProvider } from './contexts/user.context';
 import { ProductsProvider } from './contexts/product.context';
 import { HistoryItemsProvider } from './contexts/history-items.context';
 import { TimeProvider } from './contexts/time.context';
+import { BookingDataProvider } from './contexts/book-item.context';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.render(
         <ProductsProvider>
           <HistoryItemsProvider>
             <TimeProvider>
-              <App />
+              <BookingDataProvider>
+                <App />
+              </BookingDataProvider>
             </TimeProvider>
           </HistoryItemsProvider>
         </ProductsProvider>

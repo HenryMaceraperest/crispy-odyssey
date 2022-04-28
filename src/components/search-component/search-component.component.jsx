@@ -5,7 +5,7 @@ const SearchComponent = () => {
     return (
         <div className="search-container">
             <img alt='' className="background-image" src={bgimg} />
-            <form className='search-content'>
+            <form className='search-content' action='/search' method='get'>
                 <div className="search-from">
                     <h2>FROM</h2>
                     <input className='form-input' type="text" />

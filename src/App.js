@@ -4,6 +4,7 @@ import Navigation from './components/navigation/navigation.component.jsx';
 import Authenticate from './components/routes/authenticate/authenticate.component.jsx';
 import Shop from './components/routes/shop/shop.component.jsx';
 import Search from './components/routes/search/search.component.jsx';
+import BookingPage from './components/routes/book/book.component.jsx';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path='/auth' element={<Authenticate />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/book' element={<BookingPage />} />
       </Route>
     </Routes>
   )

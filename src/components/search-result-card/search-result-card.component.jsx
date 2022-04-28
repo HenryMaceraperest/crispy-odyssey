@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { HistoryItemsContext } from '../../contexts/history-items.context';
+import { BookingDataContext } from '../../contexts/book-item.context';
 import './search-result-card.styles.scss';
 
 const SearchResultCard = ({ flight, from, to, distance }) => {
@@ -8,6 +10,12 @@ const SearchResultCard = ({ flight, from, to, distance }) => {
     const start = new Date(flightStart);
     const end = new Date(flightEnd);
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+    const navigate = useNavigate();
+
+    const goToCheckoutHandler = () => {
+        navigate('/book');
+    }
 
     function timeDiff(arrival, departure) {
         let diffInMillisecs = Math.abs(arrival - departure) / 1000;
@@ -30,9 +38,12 @@ const SearchResultCard = ({ flight, from, to, distance }) => {
     const travelTime = timeDiff(end, start);
 
     const { addFlight } = useContext(HistoryItemsContext);
+    const { addToBook } = useContext(BookingDataContext);
 
     const historyClickHandler = () => {
-        addFlight({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: company.name })
+        addFlight({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: company.name });
+        addToBook({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: company.name });
+        goToCheckoutHandler();
     };
 
 
