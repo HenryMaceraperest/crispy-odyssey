@@ -10,6 +10,7 @@ const Search = () => {
     const [flights, setFlights] = useState([]);
     const location = useLocation();
     const search = location.search;
+    const [connectingFlight, setConnectingFlight] = useState(false);
 
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
@@ -23,14 +24,13 @@ const Search = () => {
 
         const fetch = async () => {
             try {
-                //console.log(fromQuery);
-                //console.log(toQuery);
                 if (!dateQuery) {
                     const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}`);
-                    setFlights(response.data)
+                    setFlights(response.data);
                 } else {
                     const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`);
                     setFlights(response.data)
+                    response.data[0].directFlight ? setConnectingFlight(false) : setConnectingFlight(true)
                 }
             } catch (error) {
                 console.error(error);
@@ -39,18 +39,14 @@ const Search = () => {
         fetch();
     }, [location]);
 
-    const directFlightResponse = () => {
-        if (flights[0].directFlight) { console.log("This is a direct flight!") };
-    };
+
     return (
         <div className="search-body">
+
             <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
-            {directFlightResponse()}
-            <h2>{flights.map(flight => (
-
-                <SearchResultCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />
-
-            ))}</h2>
+            <h2>{flights.map(flight =>
+                <SearchResultCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
+            {connectingFlight ? <h2>IT IS</h2> : <h2>It's NOT</h2>}
         </div>
     )
 };
