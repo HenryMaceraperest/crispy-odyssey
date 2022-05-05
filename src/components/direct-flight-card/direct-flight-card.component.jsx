@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { HistoryItemsContext } from '../../contexts/history-items.context';
 import { BookingDataContext } from '../../contexts/book-item.context';
-import './search-result-card.styles.scss';
+import './direct-flight-card.styles.scss';
 
-const SearchResultCard = ({ flight, from, to }) => {
+const DirectFlightCard = ({ flight, from, to }) => {
     const { id, company, price, flightStart, flightEnd, distance } = flight;
     const start = new Date(flightStart);
     const end = new Date(flightEnd);
@@ -39,8 +39,6 @@ const SearchResultCard = ({ flight, from, to }) => {
 
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
-
-    if (flight.directFlight) { console.log("You're bound to me demon... - Your arrogance will be your undoing!") };
 
     const historyClickHandler = () => {
         addFlight({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: company.name });
@@ -82,4 +80,4 @@ const SearchResultCard = ({ flight, from, to }) => {
     );
 };
 
-export default SearchResultCard;
+export default DirectFlightCard;

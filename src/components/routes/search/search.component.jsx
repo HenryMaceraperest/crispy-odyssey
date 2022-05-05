@@ -4,7 +4,8 @@ import axios from "axios";
 
 import './search.styles.scss';
 
-import SearchResultCard from "../../search-result-card/search-result-card.component";
+import DirectFlightCard from "../../direct-flight-card/direct-flight-card.component";
+import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
 
 const Search = () => {
     const [flights, setFlights] = useState([]);
@@ -44,9 +45,9 @@ const Search = () => {
         <div className="search-body">
 
             <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
-            <h2>{flights.map(flight =>
-                <SearchResultCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
-            {connectingFlight ? <h2>IT IS</h2> : <h2>It's NOT</h2>}
+            {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> :
+                <h2>{flights.map(flight =>
+                    <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>}
         </div>
     )
 };
