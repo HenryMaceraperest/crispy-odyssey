@@ -5,8 +5,8 @@ import { HistoryItemsContext } from '../../contexts/history-items.context';
 import { BookingDataContext } from '../../contexts/book-item.context';
 import './search-result-card.styles.scss';
 
-const SearchResultCard = ({ flight, from, to, distance }) => {
-    const { id, company, price, flightStart, flightEnd } = flight;
+const SearchResultCard = ({ flight, from, to }) => {
+    const { id, company, price, flightStart, flightEnd, distance } = flight;
     const start = new Date(flightStart);
     const end = new Date(flightEnd);
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -40,6 +40,8 @@ const SearchResultCard = ({ flight, from, to, distance }) => {
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
 
+    if (flight.directFlight) { console.log("You're bound to me demon... - Your arrogance will be your undoing!") };
+
     const historyClickHandler = () => {
         addFlight({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: company.name });
         addToBook({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: company.name });
@@ -55,7 +57,7 @@ const SearchResultCard = ({ flight, from, to, distance }) => {
             </div>
             <div className='card-component'>
                 <label>Ticket cost:</label>
-                <p>{price}</p>
+                <p>€{price}</p>
             </div>
             <div className='card-component'>
                 <label>Flight start: </label>
@@ -71,7 +73,7 @@ const SearchResultCard = ({ flight, from, to, distance }) => {
             </div>
             <div className='card-component'>
                 <label>Distance:</label>
-                <p>{distance}</p>
+                <p>{distance} km</p>
             </div>
             <div className='card-button'>
                 <button onClick={historyClickHandler}>Book this flight!</button>

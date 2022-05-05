@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
 
 import { BookingDataContext } from '../../../contexts/book-item.context';
 
@@ -9,18 +10,63 @@ const BookingPage = () => {
 
     // bookingData contains id, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany
     const { from, to, id, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const data = {
+            from: from,
+            to: to,
+            distance: flightDistance,
+            startDate: startDate,
+            endDate: endDate,
+            flightDuration: travelTime,
+            cost: price,
+            company: flightCompany,
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+        }
+
+        axios
+            .post('http://localhost:4000/booking', data)
+            .then((res) => { console.log(res) })
+            .catch((err) => { console.log(err) });
+    }
+
     return (
         <div>
-            <h1>This is the page to book stuff.</h1>
-            <h2>{from}</h2>
-            <h2>{to}</h2>
-            <h2>{id}</h2>
-            <h2>{flightDistance} km</h2>
-            <h2>{startDate}</h2>
-            <h2>{endDate}</h2>
-            <h2>{travelTime}</h2>
-            <h2>${price}</h2>
-            <h2>{flightCompany}</h2>
+            <form action="/booking" method="post" onSubmit={submitHandler}>
+                <div className='flight-data'>
+                    <label htmlFor="from" className='form-label'>From: </label>
+                    <p className='form-data'>{from.toUpperCase()}</p>
+                    <label htmlFor="to" className='form-label'>To: </label>
+                    <p className='form-data'>{to.toUpperCase()}</p>
+                    <label htmlFor="flight-distance" className='form-label'>Distance: </label>
+                    <p className='form-data'>{flightDistance} km</p>
+                    <label htmlFor="start-date" className='form-label'>Start: </label>
+                    <p className='form-data'>{startDate}</p>
+                    <label htmlFor="end-date" className='form-label'>End: </label>
+                    <p className='form-data'>{endDate}</p>
+                    <label htmlFor="travel-time" className='form-label'>Total travel time: </label>
+                    <p className='form-data'>{travelTime}</p>
+                    <label htmlFor="price" className='form-label'>Price: </label>
+                    <p className='form-data'>${price}</p>
+                    <label htmlFor="company-name" className='form-label'>Company name(s): </label>
+                    <p className='form-data'>{flightCompany}</p>
+                    <label htmlFor="first-name" className='form-label'>First name(s): </label>
+                    <input className='form-input' type="text" name="first-name" id="first-name" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} />
+                    <label htmlFor="last-name" className='form-label'>Last name(s): </label>
+                    <input className='form-input' type="text" name="last-name" id="last-name" value={lastName} onChange={(e) => { setLastName(e.target.value) }} />
+                    <label htmlFor="email" className='form-label'>Email: </label>
+                    <input className='form-input' type="email" name="email" id="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                </div>
+
+                <button className='form-button' type='submit'>Book Flight!</button>
+            </form>
         </div>
     )
 };
