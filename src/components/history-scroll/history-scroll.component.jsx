@@ -7,6 +7,7 @@ import './history-scroll.styles.scss';
 
 const HistoryScroll = () => {
     const { historyItems } = useContext(HistoryItemsContext)
+
     return (
         <Fragment>
             <div className="history-scroll-container">

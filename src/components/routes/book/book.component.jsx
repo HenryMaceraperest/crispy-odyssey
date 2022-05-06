@@ -56,7 +56,7 @@ const BookingPage = () => {
                     <label htmlFor="price" className='form-label'>Price: </label>
                     <p className='form-data'>${price}</p>
                     <label htmlFor="company-name" className='form-label'>Company name(s): </label>
-                    <p className='form-data'>{flightCompany}</p>
+                    <div className='form-data'>{flightCompany.map(x => <p key={x}>{x}</p>)}</div>
                     <label htmlFor="first-name" className='form-label'>First name(s): </label>
                     <input className='form-input' type="text" name="first-name" id="first-name" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} />
                     <label htmlFor="last-name" className='form-label'>Last name(s): </label>
