@@ -1,4 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useReducer } from "react";
+
+import { createAction } from "../utils/reducer/reducer.utils";
 
 const addHistoryItem = (historyItems, flightToAdd) => {
     const existingHistoryItem = historyItems.find((historyItem) => historyItem.id === flightToAdd.id);
@@ -8,32 +10,75 @@ const addHistoryItem = (historyItems, flightToAdd) => {
     return [...historyItems, { ...flightToAdd, quantity: 1 }]
 }
 
+const removeFlight = (historyItems, flightToRemove) => {
+    return historyItems.filter((historyItem) => historyItem.id !== flightToRemove.id)
+};
+
 export const HistoryItemsContext = createContext({
     isHistoryOpen: false,
     setIsHistoryOpen: () => { },
     historyItems: [],
     addFlight: () => { },
+    removeFlight: () => { },
     historyCount: 0
 });
 
+const HISTORY_ACTION_TYPES = {
+    SET_HISTORY_ITEMS: 'SET_HISTORY_ITEMS',
+    SET_IS_HISTORY_OPEN: 'SET_IS_HISTORY_OPEN'
+}
+
+const INITIAL_STATE = {
+    isHistoryOpen: false,
+    historyItems: [],
+    historyCount: 0
+};
+
+const historyReducer = (state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case HISTORY_ACTION_TYPES.SET_HISTORY_ITEMS:
+            return {
+                ...state,
+                ...payload
+            }
+        case HISTORY_ACTION_TYPES.SET_IS_HISTORY_OPEN:
+            return {
+                ...state,
+                isHistoryOpen: payload,
+            }
+        default:
+            throw new Error(`Unhandled type of ${type} in historyReducer!`)
+    }
+}
+
 export const HistoryItemsProvider = ({ children }) => {
-    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
-    const [historyItems, setHistoryItems] = useState([]);
+    const [{ historyItems, isHistoryOpen, historyCount }, dispatch] = useReducer(historyReducer, INITIAL_STATE);
 
-    const [historyCount, setHistoryCount] = useState(0);
+    const updateHistoryReducer = (newHistoryItems) => {
 
-    useEffect(() => {
-        const historyItemsCount = historyItems.reduce((total, historyItem) => total + historyItem.quantity, 0)
-        setHistoryCount(historyItemsCount)
-    }, [historyItems])
+        const historyItemsCount = historyItems.reduce((total, historyItem) => total + historyItem.quantity, 0);
 
+        dispatch(createAction(HISTORY_ACTION_TYPES.SET_HISTORY_ITEMS, { historyItems: newHistoryItems, historyCount: historyItemsCount }));
+    }
 
     const addFlight = (flightToAdd) => {
-        setHistoryItems(addHistoryItem(historyItems, flightToAdd));
+        const newHistoryItems = addHistoryItem(historyItems, flightToAdd);
+        updateHistoryReducer(newHistoryItems);
     };
 
-    const value = { isHistoryOpen, setIsHistoryOpen, addFlight, historyItems, historyCount };
+    const removeFlightFromHistory = (flightToRemove) => {
+        const newHistoryItems = removeFlight(historyItems, flightToRemove);
+        updateHistoryReducer(newHistoryItems);
+    }
+
+    const setIsHistoryOpen = (bool) => {
+        dispatch(createAction(HISTORY_ACTION_TYPES.SET_IS_HISTORY_OPEN, bool));
+    }
+
+    const value = { isHistoryOpen, removeFlightFromHistory, setIsHistoryOpen, addFlight, historyItems, historyCount };
 
     return (
         <HistoryItemsContext.Provider value={value}>{children}</HistoryItemsContext.Provider>

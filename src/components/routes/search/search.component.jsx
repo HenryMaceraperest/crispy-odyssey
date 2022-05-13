@@ -16,6 +16,7 @@ const Search = () => {
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
 
+
     useEffect(() => {
         const search = location.search;
 
@@ -39,6 +40,7 @@ const Search = () => {
         };
         fetch();
     }, [location]);
+
 
 
     return (

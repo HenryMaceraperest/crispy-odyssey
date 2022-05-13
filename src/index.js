@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './contexts/user.context';
 import { ProductsProvider } from './contexts/product.context';
 import { HistoryItemsProvider } from './contexts/history-items.context';
-import { TimeProvider } from './contexts/time.context';
+import { ValidityProvider } from './contexts/validity.context';
 import { BookingDataProvider } from './contexts/book-item.context';
 
 ReactDOM.render(
@@ -18,11 +18,11 @@ ReactDOM.render(
       <UserProvider>
         <ProductsProvider>
           <HistoryItemsProvider>
-            <TimeProvider>
+            <ValidityProvider>
               <BookingDataProvider>
                 <App />
               </BookingDataProvider>
-            </TimeProvider>
+            </ValidityProvider>
           </HistoryItemsProvider>
         </ProductsProvider>
       </UserProvider>

@@ -1,6 +1,9 @@
 import React, { createContext, useState, useEffect } from "react";
 
-const ProductsContext = createContext();
+const ProductsContext = createContext({
+    products: [],
+    setProducts: () => { }
+});
 
 const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([]);

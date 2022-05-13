@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { HistoryItemsContext } from '../../contexts/history-items.context';
 import { BookingDataContext } from '../../contexts/book-item.context';
+
 import './direct-flight-card.styles.scss';
 
 const DirectFlightCard = ({ flight, from, to }) => {
     const { id, company, price, flightStart, flightEnd, distance } = flight;
     const start = new Date(flightStart);
     const end = new Date(flightEnd);
+
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
     const navigate = useNavigate();
@@ -36,6 +38,7 @@ const DirectFlightCard = ({ flight, from, to }) => {
     };
 
     const travelTime = timeDiff(end, start);
+
 
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
