@@ -8,27 +8,22 @@ export const ValidityContext = createContext({
 });
 
 export const ValidityProvider = ({ children }) => {
-    const [isValid, setValidity] = useState(false);
     const [time, setTime] = useState('');
+
     useEffect(() => {
-        async function getData() {
-            await fetch('http://localhost:4000/time')
+        const getData = () => {
+            fetch('http://localhost:4000/time')
                 .then((response) => response.json())
-                .then((result) => setTime(result))
-                .catch((error) => console.log("An error occured!" + error));
-        };
-        getData();
+                .then((result) => { setTime(result) })
+                .catch((error) => console.log("An error occured!" + error))
+        }
+        const interval = setInterval(() => {
+            getData()
+        }, 10000)
+        return () => clearInterval(interval)
     }, []);
 
-    const timeNow = new Date().toISOString();
-
-    if (time > timeNow) {
-        setValidity(true)
-    } else {
-        setValidity(false)
-    }
-
     return (
-        <ValidityContext.Provider value={{ isValid }}>{children}</ValidityContext.Provider>
+        <ValidityContext.Provider value={{ time }}>{children}</ValidityContext.Provider>
     );
 };

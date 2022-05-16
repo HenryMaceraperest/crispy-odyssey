@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { HistoryItemsContext } from '../../contexts/history-items.context';
 import { BookingDataContext } from '../../contexts/book-item.context';
+import { ValidityContext } from '../../contexts/validity.context';
 
 import './direct-flight-card.styles.scss';
 
@@ -42,9 +43,10 @@ const DirectFlightCard = ({ flight, from, to }) => {
 
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
+    const { time } = useContext(ValidityContext);
 
     const historyClickHandler = () => {
-        addFlight({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: [company.name] });
+        addFlight({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, validityDate: time, flightCompany: [company.name] });
         addToBook({ id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: [company.name] });
         goToCheckoutHandler();
     };
