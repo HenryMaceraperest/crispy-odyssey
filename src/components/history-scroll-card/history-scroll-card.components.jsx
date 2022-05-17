@@ -39,7 +39,7 @@ const HistoryScrollCard = ({ item }) => {
     }
 
     const bookingClickHandler = () => {
-        addToBook({ flightFromTos: flightFromTos, from: from, to: to, flightDistance: flightDistance, startDate: startDate, endDate: endDate, travelTime: travelTime, price: price, flightCompany: flightCompany });
+        addToBook({ validityDate: validityDate, flightFromTos: flightFromTos, from: from, to: to, flightDistance: flightDistance, startDate: startDate, endDate: endDate, travelTime: travelTime, price: price, flightCompany: flightCompany });
         goToCheckoutHandler();
     };
     if (isValid) {
@@ -59,7 +59,7 @@ const HistoryScrollCard = ({ item }) => {
     } else {
         return (
             <div className="outer-body-outdated">
-                <p>OLD</p>
+                <p>OUTDATED</p>
                 <p>From: {from}</p>
                 <p>To: {to}</p>
                 {flightCompany ? <div>Company: {flightCompany.map(x => <p key={x}>{x}</p>)}</div> : ''}
