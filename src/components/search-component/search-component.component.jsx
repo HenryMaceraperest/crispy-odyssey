@@ -49,6 +49,18 @@ const SearchComponent = () => {
         options = type.map((el) => <option key={el}>{el}</option>);
     }
 
+    // FUNCTION TO CALCULATE DATE & ADD ON TO A DATE ===== YOU NEED TO CREATE A FUNCTION FOR THIS, SO IF THERE ARE MORE THAN 31 DAYS + TAKE INTO CONSIDERATION DIFFERENT MONTHS FOR DAYS, IT WOULD ADD ON TO THE MONTH, IF MORE THAN 12 MONTHS, THEN ADD ON A YEAR
+
+    /* const format = (n) => {
+        return (n < 10 ? '0' : '') + n;
+    }
+    const oldDate = new Date(date);
+    const day = format(oldDate.getDate());
+    const month = format(oldDate.getMonth() + 1);
+    const year = oldDate.getFullYear();
+    console.log(date);
+    console.log(year + "-" + month + "-" + day); */
+
     return (
         <div className="search-container">
             <img alt='' className="background-image" src={bgimg} />
