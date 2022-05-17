@@ -50,7 +50,6 @@ const BookingPage = () => {
             <div>
                 <form action="/booking" method="post" onSubmit={submitHandler}>
                     <div className='flight-data'>
-                        <p>{console.log(id)}</p>
                         <label htmlFor="from" className='form-label'>From: </label>
                         <p className='form-data'>{from.toUpperCase()}</p>
                         <label htmlFor="to" className='form-label'>To: </label>
@@ -85,7 +84,6 @@ const BookingPage = () => {
         return (
             <div>
                 <div className='flight-data'>
-                    <p>{console.log(id)}</p>
                     <label htmlFor="from" className='form-label'>From: </label>
                     <p className='form-data'>{from.toUpperCase()}</p>
                     <label htmlFor="to" className='form-label'>To: </label>

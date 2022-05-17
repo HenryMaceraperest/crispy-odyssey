@@ -13,8 +13,6 @@ const HistoryScroll = () => {
     return (
         <Fragment>
             <div className="history-scroll-container">
-                <p>{console.log(historyItems)}</p>
-                <p>{console.log(revHistoryItems)}</p>
                 {revHistoryItems.map(item => (
                     <HistoryScrollCard key={item.id} item={item} />
                 ))}

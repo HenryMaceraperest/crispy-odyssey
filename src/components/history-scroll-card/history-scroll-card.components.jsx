@@ -27,9 +27,6 @@ const HistoryScrollCard = ({ item }) => {
     const { addToBook } = useContext(BookingDataContext);
 
 
-    console.log(`from ${from} to ${to} valid until ${validityDate}`);
-
-
     const timeNow = new Date().toISOString();
     let isValid = false;
     if (timeNow < validityDate) {
