@@ -17,11 +17,13 @@ export const ValidityProvider = ({ children }) => {
                 .then((result) => { setTime(result) })
                 .catch((error) => console.log("An error occured!" + error))
         }
+        getData();
+
         const interval = setInterval(() => {
-            getData()
-        }, 10000)
+            getData();
+        }, 60000)
         return () => clearInterval(interval)
-    }, []);
+    }, [time]);
 
     return (
         <ValidityContext.Provider value={{ time }}>{children}</ValidityContext.Provider>

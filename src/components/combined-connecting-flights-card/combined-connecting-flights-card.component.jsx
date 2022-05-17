@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { HistoryItemsContext } from '../../contexts/history-items.context';
 import { BookingDataContext } from '../../contexts/book-item.context';
+import { ValidityContext } from '../../contexts/validity.context';
 
 import './combined-connecting-flights-card.styles.scss';
 
@@ -21,7 +22,8 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
 
     let collectionCosts = flights.map((flight) => flight.price);
     let collectionDistance = flights.map((flight) => flight.distance);
-    let collectionCompanies = flights.map((flight) => flight.company.name)
+    let collectionCompanies = flights.map((flight) => flight.company.name);
+    let flightFromTos = flights.map(({ flightFrom, flightTo }) => { return { flightFrom, flightTo } });
     let initialValue = 0;
 
     const lastFlight = flights[flights.length - 1];
@@ -62,10 +64,11 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
 
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
+    const { time } = useContext(ValidityContext);
 
     const historyClickHandler = () => {
-        addFlight({ from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies });
-        addToBook({ from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies });
+        addFlight({ flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), validityDate: time, flightCompany: collectionCompanies });
+        addToBook({ flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies });
         goToCheckoutHandler();
     };
 
@@ -101,6 +104,12 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
             <div className='card-component'>
                 <label>Total flight time:</label>
                 <p>{travelTime}</p>
+            </div>
+            <div className='card-component'>
+                <label>Travel routes:</label>
+                {flightFromTos.map((flight) =>
+                    <p key={flight.flightFrom}>{flight.flightFrom} - {flight.flightTo}</p>
+                )}
             </div>
             <div className='card-component'>
                 <label>Combined travel distance:</label>

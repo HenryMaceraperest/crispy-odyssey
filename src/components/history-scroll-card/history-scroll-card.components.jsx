@@ -9,7 +9,7 @@ import { BookingDataContext } from '../../contexts/book-item.context';
 import './history-scroll-card.styles.scss';
 
 const HistoryScrollCard = ({ item }) => {
-    const { flightCompany, from, to, flightDistance, startDate, endDate, travelTime, price, validityDate } = item;
+    const { flightFromTos, flightCompany, from, to, flightDistance, startDate, endDate, travelTime, price, validityDate } = item;
 
 
     const { removeFlightFromHistory } = useContext(HistoryItemsContext);
@@ -27,7 +27,7 @@ const HistoryScrollCard = ({ item }) => {
     const { addToBook } = useContext(BookingDataContext);
 
 
-    console.log(validityDate);
+    console.log(`from ${from} to ${to} valid until ${validityDate}`);
 
 
     const timeNow = new Date().toISOString();
@@ -39,7 +39,7 @@ const HistoryScrollCard = ({ item }) => {
     }
 
     const bookingClickHandler = () => {
-        addToBook({ from: from, to: to, flightDistance: flightDistance, startDate: startDate, endDate: endDate, travelTime: travelTime, price: price, flightCompany: flightCompany });
+        addToBook({ flightFromTos: flightFromTos, from: from, to: to, flightDistance: flightDistance, startDate: startDate, endDate: endDate, travelTime: travelTime, price: price, flightCompany: flightCompany });
         goToCheckoutHandler();
     };
     if (isValid) {

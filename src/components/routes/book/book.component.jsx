@@ -9,7 +9,7 @@ const BookingPage = () => {
     const { bookingData } = useContext(BookingDataContext);
 
     // bookingData contains id, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany
-    const { from, to, id, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
+    const { flightFromTos, from, to, id, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -26,6 +26,7 @@ const BookingPage = () => {
             flightDuration: travelTime,
             cost: price,
             company: flightCompany,
+            flightRoutes: flightFromTos,
             firstName: firstName,
             lastName: lastName,
             email: email
@@ -41,6 +42,7 @@ const BookingPage = () => {
         <div>
             <form action="/booking" method="post" onSubmit={submitHandler}>
                 <div className='flight-data'>
+                    <p>{console.log(id)}</p>
                     <label htmlFor="from" className='form-label'>From: </label>
                     <p className='form-data'>{from.toUpperCase()}</p>
                     <label htmlFor="to" className='form-label'>To: </label>
@@ -57,6 +59,8 @@ const BookingPage = () => {
                     <p className='form-data'>${price}</p>
                     <label htmlFor="company-name" className='form-label'>Company name(s): </label>
                     <div className='form-data'>{flightCompany.map(x => <p key={x}>{x}</p>)}</div>
+                    {flightFromTos ? <div><label htmlFor="routes" className='form-label'>Routes: </label>
+                        <div className='form-data'>{flightFromTos.map(flight => <p key={flight.flightFrom}>{flight.flightFrom} - {flight.flightTo}</p>)}</div></div> : ''}
                     <label htmlFor="first-name" className='form-label'>First name(s): </label>
                     <input className='form-input' type="text" name="first-name" id="first-name" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} />
                     <label htmlFor="last-name" className='form-label'>Last name(s): </label>
