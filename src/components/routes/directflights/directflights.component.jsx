@@ -7,7 +7,6 @@ const DirectFlights = () => {
     const { products } = useContext(ProductsContext);
     return (
         <div>
-            {/* Need to add sorting options here - price - date - name - distance - etc */}
             {products.map((flight) => (
                 <FlightCard key={flight.id} flight={flight} />
             ))}

@@ -8,11 +8,10 @@ import DirectFlightCard from "../../direct-flight-card/direct-flight-card.compon
 import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
 
 const Search = () => {
-    const [flights, setFlights] = useState([]);
+    const [OGflights, setOGFlights] = useState([]);
     const location = useLocation();
     const search = location.search;
     const [connectingFlight, setConnectingFlight] = useState(false);
-
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
 
@@ -28,10 +27,10 @@ const Search = () => {
             try {
                 if (!dateQuery) {
                     const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}`);
-                    setFlights(response.data);
+                    setOGFlights(response.data);
                 } else {
                     const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`);
-                    setFlights(response.data)
+                    setOGFlights(response.data)
                     response.data[0].directFlight ? setConnectingFlight(false) : setConnectingFlight(true)
                 }
             } catch (error) {
@@ -41,7 +40,7 @@ const Search = () => {
         fetch();
     }, [location]);
 
-    flights.forEach(flight => {
+    OGflights.forEach(flight => {
         const start =
             new Date(flight.flightStart);
         const end = new Date(flight.flightEnd);
@@ -50,37 +49,39 @@ const Search = () => {
     });
 
     const sortTravelTimeClickHandlerDesc = () => {
-        const sortedFlights = [...flights].sort((a, b) => parseFloat(b.travelTimeMS) - parseFloat(a.travelTimeMS));
-        setFlights(sortedFlights)
+        const sortedFlights = [...OGflights].sort((a, b) => parseFloat(b.travelTimeMS) - parseFloat(a.travelTimeMS));
+        setOGFlights(sortedFlights)
     };
 
     const sortTravelTimeClickHandlerAsc = () => {
-        const sortedFlights = [...flights].sort((a, b) => parseFloat(a.travelTimeMS) - parseFloat(b.travelTimeMS));
-        setFlights(sortedFlights)
+        const sortedFlights = [...OGflights].sort((a, b) => parseFloat(a.travelTimeMS) - parseFloat(b.travelTimeMS));
+        setOGFlights(sortedFlights)
     };
 
     const sortDateClickHandlerDesc = () => {
-        const sortedFlights = [...flights].sort((a, b) => { return new Date(a.flightStart) - new Date(b.flightStart) });
-        setFlights(sortedFlights)
+        const sortedFlights = [...OGflights].sort((a, b) => { return new Date(a.flightStart) - new Date(b.flightStart) });
+        setOGFlights(sortedFlights)
     };
 
     const sortDateClickHandlerAsc = () => {
-        const sortedFlights = [...flights].sort((a, b) => { return new Date(b.flightStart) - new Date(a.flightStart) });
-        setFlights(sortedFlights)
+        const sortedFlights = [...OGflights].sort((a, b) => { return new Date(b.flightStart) - new Date(a.flightStart) });
+        setOGFlights(sortedFlights)
     };
 
     const sortPriceClickHandlerDesc = () => {
-        const sortedFlights = [...flights].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-        setFlights(sortedFlights)
+        const sortedFlights = [...OGflights].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        setOGFlights(sortedFlights)
     };
 
     const sortPriceClickHandlerAsc = () => {
-        const sortedFlights = [...flights].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-        setFlights(sortedFlights)
+        const sortedFlights = [...OGflights].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        setOGFlights(sortedFlights)
     };
+    const [searchTerm, setSearchTerm] = useState('');
 
+    const flights = OGflights.filter(flight => flight.company.name.toLowerCase().includes(searchTerm));
 
-
+    const onSearchChange = (event) => { setSearchTerm(event.target.value.toLowerCase()) };
 
     return (
         <div className="search-body">
@@ -88,7 +89,7 @@ const Search = () => {
             <div className='sorting-div'>
                 <span className='sorting-span'>
                     <p>Company:</p>
-                    <input className="sorting-search-box" type="text" name="company-search" />
+                    <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
                 </span>
                 <span className='sorting-span'>
                     <p>Price:</p>

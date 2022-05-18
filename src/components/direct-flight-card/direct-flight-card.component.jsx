@@ -40,8 +40,6 @@ const DirectFlightCard = ({ flight, from, to }) => {
 
     const travelTime = timeDiff(end, start);
 
-    const travelTimeMS = end - start;
-
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
     const { time } = useContext(ValidityContext);
