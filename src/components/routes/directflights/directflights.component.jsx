@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { ProductsContext } from '../../../contexts/product.context';
+import { selectProducts } from '../../../store/product/product.selector';
 import FlightCard from '../../flight-card/flight-card.component';
 
 const DirectFlights = () => {
-    const { products } = useContext(ProductsContext);
+
+    const products = useSelector(selectProducts);
+
     return (
         <div>
             {products.map((flight) => (

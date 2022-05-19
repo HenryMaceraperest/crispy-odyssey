@@ -1,9 +1,10 @@
 import React, { Fragment, useContext } from "react";
 import { Outlet, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { ReactComponent as NavLogo } from '../../assets/navlogo.svg';
 
-import { UserContext } from "../../contexts/user.context";
 import { HistoryItemsContext } from "../../contexts/history-items.context";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
@@ -13,7 +14,7 @@ import HistoryScroll from "../history-scroll/history-scroll.component";
 import './navigation.styles.scss';
 
 const Navigation = () => {
-    const { currentUser } = useContext(UserContext);
+    const currentUser = useSelector(selectCurrentUser);
     const { isHistoryOpen } = useContext(HistoryItemsContext);
 
     return (
