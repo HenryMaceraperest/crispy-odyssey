@@ -9,7 +9,6 @@ import { store } from './store/store.';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HistoryItemsProvider } from './contexts/history-items.context';
-import { ValidityProvider } from './contexts/validity.context';
 import { BookingDataProvider } from './contexts/book-item.context';
 
 ReactDOM.render(
@@ -17,11 +16,9 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <HistoryItemsProvider>
-          <ValidityProvider>
-            <BookingDataProvider>
-              <App />
-            </BookingDataProvider>
-          </ValidityProvider>
+          <BookingDataProvider>
+            <App />
+          </BookingDataProvider>
         </HistoryItemsProvider>
       </BrowserRouter>
     </Provider>

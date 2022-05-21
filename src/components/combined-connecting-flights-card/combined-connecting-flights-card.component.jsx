@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import { HistoryItemsContext } from '../../contexts/history-items.context';
 import { BookingDataContext } from '../../contexts/book-item.context';
-import { ValidityContext } from '../../contexts/validity.context';
+import { selectValidity } from '../../store/validity/validity.selector';
 
 import './combined-connecting-flights-card.styles.scss';
 
@@ -64,11 +64,12 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
 
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
-    const { time } = useContext(ValidityContext);
+    const validity = useSelector(selectValidity);
+
 
     const historyClickHandler = () => {
-        addFlight({ flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), validityDate: time, flightCompany: collectionCompanies });
-        addToBook({ validityDate: time, flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies });
+        addFlight({ flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), validityDate: validity, flightCompany: collectionCompanies });
+        addToBook({ validityDate: validity, flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies });
         goToCheckoutHandler();
     };
 

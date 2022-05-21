@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import axios from "axios";
 
 import './search.styles.scss';
 
 import DirectFlightCard from "../../direct-flight-card/direct-flight-card.component";
 import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
+import { setValidity } from "../../../store/validity/validity.action";
 
 const Search = () => {
     const [OGflights, setOGFlights] = useState([]);
@@ -15,6 +17,25 @@ const Search = () => {
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
 
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        const getData = async () => {
+            await axios.get('http://localhost:4000/time')
+                .then(
+                    validity => {
+                        dispatch(setValidity(validity.data))
+                    }, error => {
+                        console.log("An error occured, in search.component! Error: " + error);
+                    });
+        };
+        getData();
+        const interval = setInterval(() => {
+            getData();
+        }, 10000)
+        return () => clearInterval(interval)
+    }, [dispatch]);
 
     useEffect(() => {
         const search = location.search;

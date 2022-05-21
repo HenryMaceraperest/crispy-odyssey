@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { HistoryItemsContext } from '../../contexts/history-items.context';
 import { BookingDataContext } from '../../contexts/book-item.context';
-import { ValidityContext } from '../../contexts/validity.context';
+import { selectValidity } from '../../store/validity/validity.selector';
 
 import './direct-flight-card.styles.scss';
 
@@ -42,11 +43,12 @@ const DirectFlightCard = ({ flight, from, to }) => {
 
     const { addFlight } = useContext(HistoryItemsContext);
     const { addToBook } = useContext(BookingDataContext);
-    const { time } = useContext(ValidityContext);
+    const validity = useSelector(selectValidity);
+
 
     const historyClickHandler = () => {
-        addFlight({ flightFromTos: null, id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, validityDate: time, flightCompany: [company.name] });
-        addToBook({ validityDate: time, flightFromTos: null, id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: [company.name] });
+        addFlight({ flightFromTos: null, id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, validityDate: validity, flightCompany: [company.name] });
+        addToBook({ validityDate: validity, flightFromTos: null, id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: [company.name] });
         goToCheckoutHandler();
     };
 

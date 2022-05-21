@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils';
 import { setCurrentUser } from './store/user/user.action';
-import { setProducts } from './store/product/product.action';
 
 import Home from './components/routes/home/home.component.jsx';
 import Navigation from './components/navigation/navigation.component.jsx';
@@ -15,20 +14,6 @@ import BookingPage from './components/routes/book/book.component.jsx';
 
 const App = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const getData = async () => {
-      await fetch('http://localhost:4000')
-        .then((response) => response.json())
-        .then((result) => dispatch(setProducts(result)))
-        .then((result) => console.log(result))
-        .catch((error) => console.log("An error occured!" + error))
-
-    };
-
-    getData();
-
-  }, [dispatch]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {

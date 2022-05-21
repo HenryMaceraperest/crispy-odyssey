@@ -1,0 +1,1 @@
+export const selectValidity = (state) => state.validity.validity;
