@@ -1,0 +1,1 @@
+export const selectBookings = (state) => state.bookingData.bookingData;

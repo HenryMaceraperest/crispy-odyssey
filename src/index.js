@@ -8,18 +8,12 @@ import { store } from './store/store.';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { HistoryItemsProvider } from './contexts/history-items.context';
-import { BookingDataProvider } from './contexts/book-item.context';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <HistoryItemsProvider>
-          <BookingDataProvider>
-            <App />
-          </BookingDataProvider>
-        </HistoryItemsProvider>
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

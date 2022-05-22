@@ -1,17 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { HistoryItemsContext } from '../../contexts/history-items.context';
-import { BookingDataContext } from '../../contexts/book-item.context';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { addFlight } from '../../store/history/history.action';
+import { selectHistoryItems } from '../../store/history/history.selector';
 import { selectValidity } from '../../store/validity/validity.selector';
+import { addBooking } from '../../store/booking/booking.action';
 
 import './combined-connecting-flights-card.styles.scss';
 
 const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const goToCheckoutHandler = () => {
+    const goToBookHandler = () => {
         navigate('/book');
     }
 
@@ -62,15 +65,14 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
         initialValue
     );
 
-    const { addFlight } = useContext(HistoryItemsContext);
-    const { addToBook } = useContext(BookingDataContext);
     const validity = useSelector(selectValidity);
 
+    const historyItems = useSelector(selectHistoryItems);
 
     const historyClickHandler = () => {
-        addFlight({ flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), validityDate: validity, flightCompany: collectionCompanies });
-        addToBook({ validityDate: validity, flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies });
-        goToCheckoutHandler();
+        dispatch(addFlight(historyItems, { flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), validityDate: validity, flightCompany: collectionCompanies }));
+        dispatch(addBooking({ validityDate: validity, flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies }));
+        goToBookHandler();
     };
 
     return (

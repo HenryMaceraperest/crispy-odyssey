@@ -1,18 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-import { BookingDataContext } from '../../../contexts/book-item.context';
+import { selectBookings } from '../../../store/booking/booking.selector';
 
 import './book.styles.scss';
 
 const BookingPage = () => {
-    const { bookingData } = useContext(BookingDataContext);
-
     // bookingData contains id, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany
-    const { validityDate, flightFromTos, from, to, id, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
+    const bookingData = useSelector(selectBookings);
+
+    const { validityDate, flightFromTos, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+
+    const navigate = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -34,8 +38,13 @@ const BookingPage = () => {
 
         axios
             .post('http://localhost:4000/booking', data)
-            .then((res) => { console.log(res) })
+            .then((res) => {
+                if (res.status === 200)
+                    navigate('/')
+            })
             .catch((err) => { console.log(err) });
+
+
     };
 
     const timeNow = new Date().toISOString();

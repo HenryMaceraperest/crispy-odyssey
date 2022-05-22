@@ -1,0 +1,3 @@
+export const BOOKING_ACTION_TYPES = {
+    ADD_BOOKING_DATA: 'ADD_BOOKING_DATA'
+};

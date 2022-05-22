@@ -1,12 +1,11 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 import { Outlet, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectIsHistoryOpen } from "../../store/history/history.selector";
 
 import { ReactComponent as NavLogo } from '../../assets/navlogo.svg';
-
-import { HistoryItemsContext } from "../../contexts/history-items.context";
-
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import HistoryIcon from "../history-icon/history-icon.component";
 import HistoryScroll from "../history-scroll/history-scroll.component";
@@ -15,7 +14,7 @@ import './navigation.styles.scss';
 
 const Navigation = () => {
     const currentUser = useSelector(selectCurrentUser);
-    const { isHistoryOpen } = useContext(HistoryItemsContext);
+    const isHistoryOpen = useSelector(selectIsHistoryOpen);
 
     return (
         <Fragment>

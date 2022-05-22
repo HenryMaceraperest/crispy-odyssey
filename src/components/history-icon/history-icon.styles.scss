@@ -1,18 +1,18 @@
-.history-icon-container{
+.history-icon-container {
     width: 45px;
-    height: 465px;
+    height: 45px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 
-    .icon{
+    .icon {
         width: 24px;
         height: 34px;
     }
 
-    .item-count{
+    .item-count {
         position: absolute;
         font-size: 12px;
         font-weight: bold;

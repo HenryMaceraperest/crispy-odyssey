@@ -1,7 +1,7 @@
 import { VALIDITY_ACTION_TYPES } from "./validity.types";
 
 const INITIAL_STATE = {
-    validity: 'TODAY'
+    validity: ''
 };
 
 export const validityReducer = (state = INITIAL_STATE, action) => {

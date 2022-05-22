@@ -1,30 +1,30 @@
-import React, { useContext } from "react";
-
-import { HistoryItemsContext } from "../../contexts/history-items.context";
-
+import React from "react";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 
-import { BookingDataContext } from '../../contexts/book-item.context';
+import { removeFlightFromHistory } from "../../store/history/history.action";
+import { selectHistoryItems } from "../../store/history/history.selector";
+import { addBooking } from '../../store/booking/booking.action';
+
 
 import './history-scroll-card.styles.scss';
 
 const HistoryScrollCard = ({ item }) => {
     const { flightFromTos, flightCompany, from, to, flightDistance, startDate, endDate, travelTime, price, validityDate } = item;
 
+    const historyItems = useSelector(selectHistoryItems);
 
-    const { removeFlightFromHistory } = useContext(HistoryItemsContext);
+    const dispatch = useDispatch();
 
     const removeClickHandler = () => {
-        removeFlightFromHistory(item)
+        dispatch(removeFlightFromHistory(historyItems, item))
     };
 
     const navigate = useNavigate();
 
-    const goToCheckoutHandler = () => {
+    const goToBookHandler = () => {
         navigate('/book');
     }
-
-    const { addToBook } = useContext(BookingDataContext);
 
 
     const timeNow = new Date().toISOString();
@@ -36,8 +36,8 @@ const HistoryScrollCard = ({ item }) => {
     }
 
     const bookingClickHandler = () => {
-        addToBook({ validityDate: validityDate, flightFromTos: flightFromTos, from: from, to: to, flightDistance: flightDistance, startDate: startDate, endDate: endDate, travelTime: travelTime, price: price, flightCompany: flightCompany });
-        goToCheckoutHandler();
+        dispatch(addBooking({ validityDate: validityDate, flightFromTos: flightFromTos, from: from, to: to, flightDistance: flightDistance, startDate: startDate, endDate: endDate, travelTime: travelTime, price: price, flightCompany: flightCompany }));
+        goToBookHandler();
     };
     if (isValid) {
         return (

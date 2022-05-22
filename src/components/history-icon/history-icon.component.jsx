@@ -1,15 +1,17 @@
-import { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 
 import { ReactComponent as Icon } from '../../assets/history-icon.svg';
 import './history-icon.styles.scss';
 
-import { HistoryItemsContext } from '../../contexts/history-items.context';
+import { setIsHistoryOpen } from '../../store/history/history.action';
+import { selectIsHistoryOpen, selectHistoryCount } from '../../store/history/history.selector';
 
 const HistoryIcon = () => {
+    const dispatch = useDispatch();
+    const isHistoryOpen = useSelector(selectIsHistoryOpen);
+    const historyCount = useSelector(selectHistoryCount);
 
-    const { isHistoryOpen, setIsHistoryOpen, historyCount } = useContext(HistoryItemsContext);
-
-    const toggleIsHistoryOpen = () => setIsHistoryOpen(!isHistoryOpen);
+    const toggleIsHistoryOpen = () => dispatch(setIsHistoryOpen(!isHistoryOpen));
 
     return (
         <div className='history-icon-container' onClick={toggleIsHistoryOpen}>

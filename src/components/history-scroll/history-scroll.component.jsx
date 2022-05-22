@@ -1,12 +1,13 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
+import { useSelector } from 'react-redux'
 
 import HistoryScrollCard from "../history-scroll-card/history-scroll-card.components";
-import { HistoryItemsContext } from "../../contexts/history-items.context";
+import { selectHistoryItems } from "../../store/history/history.selector";
 
 import './history-scroll.styles.scss';
 
 const HistoryScroll = () => {
-    const { historyItems } = useContext(HistoryItemsContext);
+    const historyItems = useSelector(selectHistoryItems);
     const revHistoryItems = [...historyItems].reverse();
 
 
