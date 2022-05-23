@@ -1,1 +1,8 @@
-export const selectBookings = (state) => state.bookingData.bookingData;
+import { createSelector } from "reselect";
+
+const selectBookingsReducer = (state) => state.bookingData;
+
+export const selectBookings = createSelector(
+    [selectBookingsReducer],
+    (bookingDataSlice) => bookingDataSlice.bookingData
+);

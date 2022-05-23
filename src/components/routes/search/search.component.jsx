@@ -33,7 +33,7 @@ const Search = () => {
         getData();
         const interval = setInterval(() => {
             getData();
-        }, 10000)
+        }, 60000)
         return () => clearInterval(interval)
     }, [dispatch]);
 
