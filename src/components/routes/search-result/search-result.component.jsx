@@ -108,11 +108,10 @@ const SearchResult = () => {
     const FQ = fromQuery.toLowerCase();
     const TQ = toQuery.toLowerCase();
 
-    if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus'))) {
-
+    if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus'))) {
         return (
             <div>
-                {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> :
+                {!connectingFlight ?
                     <div className="search-body">
                         <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
                         <div className='sorting-div'>
@@ -139,17 +138,20 @@ const SearchResult = () => {
                         <h2>{flights.map(flight =>
                             <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
                     </div>
-                }
+                    : <div>Something went wrong! Please try again!</div>}
             </div>
         )
 
-    } else {
+    } else if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
+        return (
+            <div>
+                {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>Something went wrong! Please try again!</div>}
+            </div>
+        )
+    } else
         return (
             <WrongRoute404 from={fromQuery} to={toQuery} />
         )
-    }
-
-
 };
 
 export default SearchResult;
