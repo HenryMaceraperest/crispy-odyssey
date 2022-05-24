@@ -1,0 +1,35 @@
+.text-background {
+    background-image: url(background.avif);
+    background-repeat: repeat;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 200px;
+    font-size: 80px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Steelfish Rg', 'helvetica neue',
+        helvetica, arial, sans-serif;
+    font-weight: 800;
+    -webkit-font-smoothing: antialiased;
+}
+
+.text-background-small {
+    background-image: url(background.avif);
+    background-repeat: repeat;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 200px;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Steelfish Rg', 'helvetica neue',
+        helvetica, arial, sans-serif;
+    font-weight: 800;
+    -webkit-font-smoothing: antialiased;
+}
+
+br {
+    display: none;
+}

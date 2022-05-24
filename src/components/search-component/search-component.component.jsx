@@ -17,7 +17,7 @@ const SearchComponent = () => {
 
     const Earth = ['Jupiter', 'Mars', 'Mercury', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
     const Jupiter = ['Earth', 'Mars', 'Mercury', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
-    const Marss = ['Earth', 'Jupiter', 'Mercury', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
+    const Mars = ['Earth', 'Jupiter', 'Mercury', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
     const Mercury = ['Earth', 'Jupiter', 'Mars', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
     const Neptune = ['Earth', 'Jupiter', 'Mars', 'Mercury', 'Saturn', 'Uranus', 'Venus'];
     const Saturn = ['Earth', 'Jupiter', 'Mars', 'Mercury', 'Neptune', 'Uranus', 'Venus'];
@@ -28,7 +28,7 @@ const SearchComponent = () => {
     let options = null;
 
     if (selected === "Mars") {
-        type = Marss;
+        type = Mars;
     } else if (selected === "Earth") {
         type = Earth
     } else if (selected === "Jupiter") {

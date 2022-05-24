@@ -3,10 +3,30 @@
     padding: 10px 30px;
     border: 1px solid white;
     color: white;
+    text-align: center;
+    border-radius: 10px;
 
     &:hover {
         background-color: rgb(99, 16, 99);
         cursor: pointer;
+    }
+
+    .button-button {
+        background-color: rgba(128, 0, 128, 0.966);
+        padding: 5px 50px;
+        border-radius: 15px;
+        position: relative;
+        top: 0;
+        color: white;
+        box-shadow: 0 2px 2px -2px gray;
+        transition: top ease 0.3s;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(128, 0, 128);
+            top: -3px;
+        }
     }
 }
 
@@ -15,8 +35,28 @@
     padding: 10px 30px;
     border: 1px solid white;
     color: white;
+    text-align: center;
+    border-radius: 10px;
 
     &:hover {
         background-color: rgba(77, 66, 77, 0.777);
+    }
+
+    .button-button {
+        background-color: rgba(82, 46, 82, 0.966);
+        padding: 5px 50px;
+        border-radius: 15px;
+        position: relative;
+        top: 0;
+        color: white;
+        box-shadow: 0 2px 2px -2px gray;
+        transition: top ease 0.3s;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(77, 66, 77, 0.777);
+            top: -3px;
+        }
     }
 }

@@ -7,6 +7,8 @@ import './search.styles.scss';
 
 import DirectFlightCard from "../../direct-flight-card/direct-flight-card.component";
 import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
+import WrongRoute404 from "../../404-pages/wrong-route/wrong-route.component";
+
 import { setValidity } from "../../../store/validity/validity.action";
 
 const Search = () => {
@@ -103,36 +105,51 @@ const Search = () => {
     const flights = OGflights.filter(flight => flight.company.name.toLowerCase().includes(searchTerm));
 
     const onSearchChange = (event) => { setSearchTerm(event.target.value.toLowerCase()) };
+    const FQ = fromQuery.toLowerCase();
+    const TQ = toQuery.toLowerCase();
 
-    return (
-        <div className="search-body">
-            <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
-            <div className='sorting-div'>
-                <span className='sorting-span'>
-                    <p>Company:</p>
-                    <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
-                </span>
-                <span className='sorting-span'>
-                    <p>Price:</p>
-                    <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
-                    <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
-                </span>
-                <span className='sorting-span'>
-                    <p>Date:</p>
-                    <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
-                    <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
-                </span>
-                <span className='sorting-span'>
-                    <p>Travel time:</p>
-                    <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
-                    <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
-                </span>
+    if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus'))) {
+
+        return (
+            <div>
+                {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> :
+                    <div className="search-body">
+                        <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
+                        <div className='sorting-div'>
+                            <span className='sorting-span'>
+                                <p>Company:</p>
+                                <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
+                            </span>
+                            <span className='sorting-span'>
+                                <p>Price:</p>
+                                <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
+                                <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
+                            </span>
+                            <span className='sorting-span'>
+                                <p>Date:</p>
+                                <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
+                                <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
+                            </span>
+                            <span className='sorting-span'>
+                                <p>Travel time:</p>
+                                <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
+                                <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
+                            </span>
+                        </div>
+                        <h2>{flights.map(flight =>
+                            <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
+                    </div>
+                }
             </div>
-            {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> :
-                <h2>{flights.map(flight =>
-                    <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>}
-        </div>
-    )
+        )
+
+    } else {
+        return (
+            <WrongRoute404 from={fromQuery} to={toQuery} />
+        )
+    }
+
+
 };
 
 export default Search;

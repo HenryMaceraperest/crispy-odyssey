@@ -41,21 +41,24 @@ const HistoryScrollCard = ({ item }) => {
     };
     if (isValid) {
         return (
-            <div className="outer-body" onClick={bookingClickHandler}>
-                <div className='remove-button' onClick={removeClickHandler}>X</div>
-                <p>From: {from}</p>
-                <p>To: {to}</p>
-                {flightCompany ? <div>Company: {flightCompany.map(x => <p key={x}>{x}</p>)}</div> : ''}
-                {flightDistance ? <p>Distance: {flightDistance} km</p> : ''}
-                {startDate ? <p>Start: {startDate}</p> : ''}
-                {endDate ? <p>End: {endDate}</p> : ''}
-                {travelTime ? <p>Total time: {travelTime}</p> : ''}
-                {price ? <p>Price: {price}€</p> : ''}
+            <div className="outer-body" >
+                <button className="button-button" onClick={removeClickHandler}>X</button>
+                <div onClick={bookingClickHandler}>
+                    <p>From: {from}</p>
+                    <p>To: {to}</p>
+                    {flightCompany ? <div>Company: {flightCompany.map(x => <p key={x}>{x}</p>)}</div> : ''}
+                    {flightDistance ? <p>Distance: {flightDistance} km</p> : ''}
+                    {startDate ? <p>Start: {startDate}</p> : ''}
+                    {endDate ? <p>End: {endDate}</p> : ''}
+                    {travelTime ? <p>Total time: {travelTime}</p> : ''}
+                    {price ? <p>Price: {price}€</p> : ''}
+                </div>
             </div>
         );
     } else {
         return (
             <div className="outer-body-outdated">
+                <button className="button-button" onClick={removeClickHandler}>X</button>
                 <p>OUTDATED</p>
                 <p>From: {from}</p>
                 <p>To: {to}</p>
