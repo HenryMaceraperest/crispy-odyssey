@@ -82,7 +82,7 @@ const BookingPage = () => {
                         <label htmlFor="last-name" className='form-label'>Last name(s): </label>
                         <input className='form-input' type="text" name="last-name" id="last-name" value={lastName} onChange={(e) => { setLastName(e.target.value) }} />
                         <label htmlFor="email" className='form-label'>Email: </label>
-                        <input className='form-input' type="email" name="email" id="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                        <input className='form-input' type="email" name="email" id="email" value={'email'} onChange={(e) => { setEmail(e.target.value) }} />
                     </div>
 
                     <button className='form-button' type='submit'>Book Flight!</button>

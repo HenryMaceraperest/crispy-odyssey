@@ -9,8 +9,9 @@ import Home from './components/routes/home/home.component.jsx';
 import Navigation from './components/navigation/navigation.component.jsx';
 import Authenticate from './components/routes/authenticate/authenticate.component.jsx';
 import DirectFlights from './components/routes/directflights/directflights.component.jsx';
-import Search from './components/routes/search/search.component.jsx';
+import SearchResult from './components/routes/search-result/search-result.component.jsx';
 import BookingPage from './components/routes/book/book.component.jsx';
+import Default404 from './components/404-pages/default/default-404.component';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,8 +32,9 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path='/auth' element={<Authenticate />} />
         <Route path='/directflights' element={<DirectFlights />} />
-        <Route path='/search' element={<Search />} />
+        <Route path='/search' element={<SearchResult />} />
         <Route path='/book' element={<BookingPage />} />
+        <Route path='*' element={<Default404 />} />
       </Route>
     </Routes>
   )

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import axios from "axios";
 
-import './search.styles.scss';
+import './search-result.styles.scss';
 
 import DirectFlightCard from "../../direct-flight-card/direct-flight-card.component";
 import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
@@ -11,7 +11,7 @@ import WrongRoute404 from "../../404-pages/wrong-route/wrong-route.component";
 
 import { setValidity } from "../../../store/validity/validity.action";
 
-const Search = () => {
+const SearchResult = () => {
     const [OGflights, setOGFlights] = useState([]);
     const location = useLocation();
     const search = location.search;
@@ -152,4 +152,4 @@ const Search = () => {
 
 };
 
-export default Search;
+export default SearchResult;
