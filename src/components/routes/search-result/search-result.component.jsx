@@ -8,6 +8,7 @@ import './search-result.styles.scss';
 import DirectFlightCard from "../../direct-flight-card/direct-flight-card.component";
 import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
 import WrongRoute404 from "../../404-pages/wrong-route/wrong-route.component";
+import Custom400Error from "../../404-pages/custom-400/custom-400.component";
 
 import { setValidity } from "../../../store/validity/validity.action";
 
@@ -18,6 +19,7 @@ const SearchResult = () => {
     const [connectingFlight, setConnectingFlight] = useState(false);
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
+    const dateQuery = new URLSearchParams(search).get('date');
 
     const dispatch = useDispatch();
 
@@ -138,14 +140,18 @@ const SearchResult = () => {
                         <h2>{flights.map(flight =>
                             <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
                     </div>
-                    : <div>Something went wrong! Please try again!</div>}
+                    : <div>Something went wrong! Please try again (Not connecting flight error)!</div>}
             </div>
         )
 
+    } else if (!dateQuery && ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus')))) {
+        return (
+            <Custom400Error bigText={'TRY AGAIN!'} smallText={'FOR CONNECTING FLIGHTS, PLEASE SELECT A DATE!'} />
+        )
     } else if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
         return (
             <div>
-                {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>Something went wrong! Please try again!</div>}
+                {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>No flights on this date for these routes, please try a different date!</div>}
             </div>
         )
     } else
