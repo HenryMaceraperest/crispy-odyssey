@@ -110,48 +110,47 @@ const SearchResult = () => {
     const FQ = fromQuery.toLowerCase();
     const TQ = toQuery.toLowerCase();
 
-    if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus' || TQ === 'venus'))) {
+    if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
         return (
             <div>
-                {!connectingFlight ?
-                    <div className="search-body">
-                        <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
-                        <div className='sorting-div'>
-                            <span className='sorting-span'>
-                                <p>Company:</p>
-                                <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
-                            </span>
-                            <span className='sorting-span'>
-                                <p>Price:</p>
-                                <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
-                                <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
-                            </span>
-                            <span className='sorting-span'>
-                                <p>Date:</p>
-                                <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
-                                <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
-                            </span>
-                            <span className='sorting-span'>
-                                <p>Travel time:</p>
-                                <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
-                                <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
-                            </span>
-                        </div>
-                        <h2>{flights.map(flight =>
-                            <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
+                <div className="search-body">
+                    <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
+                    <div className='sorting-div'>
+                        <span className='sorting-span'>
+                            <p>Company:</p>
+                            <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
+                        </span>
+                        <span className='sorting-span'>
+                            <p>Price:</p>
+                            <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
+                            <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
+                        </span>
+                        <span className='sorting-span'>
+                            <p>Date:</p>
+                            <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
+                            <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
+                        </span>
+                        <span className='sorting-span'>
+                            <p>Travel time:</p>
+                            <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
+                            <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
+                        </span>
                     </div>
-                    : <div>Something went wrong! Please try again (Not connecting flight error)!</div>}
+                    <h2>{flights.map(flight =>
+                        <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
+                </div>
             </div>
         )
 
-    } else if (!dateQuery && ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus')))) {
+    } else if (!dateQuery && ((FQ === 'earth' && (TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')))) {
         return (
             <Custom400Error bigText={'TRY AGAIN!'} smallText={'FOR CONNECTING FLIGHTS, PLEASE SELECT A DATE!'} />
         )
-    } else if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
+    } else if ((FQ === 'earth' && (TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus'))) {
         return (
             <div>
-                {connectingFlight ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>No flights on this date for these routes, please try a different date!</div>}
+                <div>{console.log(connectingFlight)}</div>
+                {flights.length > 1 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>No flights on this date for these routes, please try a different date!</div>}
             </div>
         )
     } else
