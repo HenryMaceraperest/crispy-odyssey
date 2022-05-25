@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { selectBookings } from '../../../store/booking/booking.selector';
-import { selectCurrentUser } from '../../../store/user/user.selector';
 
 import './book.styles.scss';
 
@@ -12,10 +11,12 @@ const BookingPage = () => {
     // bookingData contains id, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany
     const bookingData = useSelector(selectBookings);
 
+
     const { validityDate, flightFromTos, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+    //const [id, setID] = useState('');
 
     const navigate = useNavigate();
 
@@ -48,7 +49,7 @@ const BookingPage = () => {
 
     };
 
-    const user = useSelector(selectCurrentUser);
+
 
     const timeNow = new Date().toISOString();
     let isValid = false;
@@ -85,9 +86,8 @@ const BookingPage = () => {
                         <label htmlFor="last-name" className='form-label'>Last name(s): </label>
                         <input className='form-input' type="text" name="last-name" id="last-name" value={lastName} onChange={(e) => { setLastName(e.target.value) }} />
                         <label htmlFor="email" className='form-label'>Email: </label>
-                        <input className='form-input' type="email" name="email" id="email" value={user ? user.email : ''} onChange={(e) => { setEmail(e.target.value) }} />
+                        <input className='form-input' type="email" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} />
                     </div>
-
                     <button className='form-button' type='submit'>Book Flight!</button>
                 </form>
             </div>
