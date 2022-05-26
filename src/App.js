@@ -9,8 +9,8 @@ import Home from './routes/home/home.component.jsx';
 import Navigation from './components/navigation/navigation.component.jsx';
 import Authenticate from './components/routes/authenticate/authenticate.component.jsx';
 import DirectFlights from './components/routes/directflights/directflights.component.jsx';
-import SearchResult from './components/routes/search-result/search-result.component.jsx';
-import BookingPage from './components/routes/book/book.component.jsx';
+import SearchResult from './routes/search-result/search-result.component.jsx';
+import BookingPage from './routes/book/book.component.jsx';
 import Default404 from './components/404-pages/default/default-404.component';
 
 const App = () => {
