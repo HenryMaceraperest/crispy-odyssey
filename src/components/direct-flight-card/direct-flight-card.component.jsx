@@ -6,7 +6,6 @@ import { addFlight } from '../../store/history/history.action';
 import { selectHistoryItems } from '../../store/history/history.selector';
 import { selectValidity } from '../../store/validity/validity.selector';
 import { addBooking } from '../../store/booking/booking.action';
-import { getRandomID } from '../../utils/random/random.utils';
 
 import './direct-flight-card.styles.scss';
 
@@ -48,7 +47,6 @@ const DirectFlightCard = ({ flight, from, to }) => {
 
 
     const historyClickHandler = () => {
-        getRandomID();
         dispatch(addFlight(historyItems, { flightFromTos: null, id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, validityDate: validity, flightCompany: [company.name] }));
         dispatch(addBooking({ validityDate: validity, flightFromTos: null, id: id, from: from, to: to, flightDistance: distance, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: price, flightCompany: [company.name] }));
         goToBookHandler();

@@ -11,6 +11,14 @@ export const bookingReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 bookingData: action.payload
             }
+        case BOOKING_ACTION_TYPES.SET_BOOKING_ID:
+            return {
+                ...state,
+                bookingData: {
+                    ...state.bookingData,
+                    bookingID: action.payload
+                }
+            }
         default:
             return state;
     }

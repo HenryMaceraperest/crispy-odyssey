@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { useDispatch } from "react-redux";
+import { setBookingID } from "../../store/booking/booking.action";
 
 export const getRandomID = () => {
     axios.post('https://api.random.org/json-rpc/4/invoke', [
@@ -19,5 +21,5 @@ export const getRandomID = () => {
     ], [
         { headers: { 'Content-Type': 'application/JSON' } }
     ])
-        .then((result) => console.log(result.data[0].result.random.data[0]))
+        .then((result) => useDispatch(setBookingID(result.data[0].result.random.data[0])))
 };

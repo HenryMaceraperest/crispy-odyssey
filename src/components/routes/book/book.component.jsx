@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import { selectBookings } from '../../../store/booking/booking.selector';
+import { selectBookingID, selectBookings } from '../../../store/booking/booking.selector';
+import { setBookingID } from '../../../store/booking/booking.action';
 
 import './book.styles.scss';
 
@@ -11,12 +12,38 @@ const BookingPage = () => {
     // bookingData contains id, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany
     const bookingData = useSelector(selectBookings);
 
-
     const { validityDate, flightFromTos, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    //const [id, setID] = useState('');
+    const [randomBookingID, setRandomBookingID] = useState('');
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const getRandomID = async () => {
+            await axios.post('https://api.random.org/json-rpc/4/invoke', [
+                {
+                    "jsonrpc": "2.0",
+                    "method": "generateStrings",
+                    "params": {
+                        "apiKey": "8b251143-a233-4436-a5dd-30ec7a9d3be6",
+                        "n": 1,
+                        "length": 6,
+                        "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789",
+                        "replacement": true,
+                        "pregeneratedRandomization": null
+                    },
+                    "id": 1378
+                }
+            ], [
+                { headers: { 'Content-Type': 'application/JSON' } }
+            ])
+                .then((result) => dispatch(setBookingID(result.data[0].result.random.data[0])))
+                .catch((e) => console.log(e))
+        };
+        getRandomID();
+    }, [dispatch]);
 
     const navigate = useNavigate();
 
@@ -35,7 +62,8 @@ const BookingPage = () => {
             flightRoutes: flightFromTos,
             firstName: firstName,
             lastName: lastName,
-            email: email
+            email: email,
+            bookingID: randomBookingID
         }
 
         axios
@@ -50,6 +78,8 @@ const BookingPage = () => {
     };
 
 
+
+    const randomId = useSelector(selectBookingID);
 
     const timeNow = new Date().toISOString();
     let isValid = false;
@@ -88,7 +118,8 @@ const BookingPage = () => {
                         <label htmlFor="email" className='form-label'>Email: </label>
                         <input className='form-input' type="email" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} />
                     </div>
-                    <button className='form-button' type='submit'>Book Flight!</button>
+                    <button className='form-button' type='submit' onClick={() =>
+                        setRandomBookingID(randomId)}>Book Flight!</button>
                 </form>
             </div>
         )
