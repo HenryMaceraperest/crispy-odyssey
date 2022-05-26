@@ -1,0 +1,28 @@
+.main-div {
+    justify-content: space-evenly;
+    text-align: center;
+
+    .paragraph {
+        color: azure
+    }
+
+    .button {
+        background-color: rgba(128, 0, 128, 0.966);
+        opacity: 0.8;
+        padding: 15px 30px;
+        border-radius: 15px;
+        margin-top: 50px;
+        position: relative;
+        top: 0;
+        color: white;
+        box-shadow: 0 2px 2px -2px gray;
+        transition: top ease 0.3s;
+
+        &:hover {
+            background-color: rgb(128, 0, 128);
+            top: -3px;
+            box-shadow: 0 5px 2px -2px gray;
+        }
+    }
+
+}

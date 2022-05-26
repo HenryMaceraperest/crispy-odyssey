@@ -9,6 +9,7 @@ import DirectFlightCard from "../../direct-flight-card/direct-flight-card.compon
 import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
 import WrongRoute404 from "../../404-pages/wrong-route/wrong-route.component";
 import Custom400Error from "../../404-pages/custom-400/custom-400.component";
+import ChangeDate from "../../change-date-card/change-date.component";
 
 import { setValidity } from "../../../store/validity/validity.action";
 
@@ -16,7 +17,6 @@ const SearchResult = () => {
     const [OGflights, setOGFlights] = useState([]);
     const location = useLocation();
     const search = location.search;
-    const [connectingFlight, setConnectingFlight] = useState(false);
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
     const dateQuery = new URLSearchParams(search).get('date');
@@ -56,7 +56,7 @@ const SearchResult = () => {
                 } else {
                     const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`);
                     setOGFlights(response.data)
-                    response.data[0].directFlight ? setConnectingFlight(false) : setConnectingFlight(true)
+                    //response.data[0].directFlight ? setConnectingFlight(false) : setConnectingFlight(true)
                 }
             } catch (error) {
                 console.error(error);
@@ -113,32 +113,34 @@ const SearchResult = () => {
     if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
         return (
             <div>
-                <div className="search-body">
-                    <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
-                    <div className='sorting-div'>
-                        <span className='sorting-span'>
-                            <p>Company:</p>
-                            <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
-                        </span>
-                        <span className='sorting-span'>
-                            <p>Price:</p>
-                            <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
-                            <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
-                        </span>
-                        <span className='sorting-span'>
-                            <p>Date:</p>
-                            <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
-                            <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
-                        </span>
-                        <span className='sorting-span'>
-                            <p>Travel time:</p>
-                            <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
-                            <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
-                        </span>
+                {flights.length > 1 ?
+                    <div className="search-body">
+                        <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
+                        <div className='sorting-div'>
+                            <span className='sorting-span'>
+                                <p>Company:</p>
+                                <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
+                            </span>
+                            <span className='sorting-span'>
+                                <p>Price:</p>
+                                <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
+                                <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
+                            </span>
+                            <span className='sorting-span'>
+                                <p>Date:</p>
+                                <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
+                                <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
+                            </span>
+                            <span className='sorting-span'>
+                                <p>Travel time:</p>
+                                <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
+                                <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
+                            </span>
+                        </div>
+                        <h2>{flights.map(flight =>
+                            <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
                     </div>
-                    <h2>{flights.map(flight =>
-                        <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
-                </div>
+                    : <div>{dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}</div>}
             </div>
         )
 
@@ -149,8 +151,7 @@ const SearchResult = () => {
     } else if ((FQ === 'earth' && (TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus'))) {
         return (
             <div>
-                <div>{console.log(connectingFlight)}</div>
-                {flights.length > 1 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>No flights on this date for these routes, please try a different date!</div>}
+                {flights.length > 1 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}
             </div>
         )
     } else

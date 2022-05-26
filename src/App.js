@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils';
 import { setCurrentUser } from './store/user/user.action';
 
-import Home from './components/routes/home/home.component.jsx';
+import Home from './routes/home/home.component.jsx';
 import Navigation from './components/navigation/navigation.component.jsx';
 import Authenticate from './components/routes/authenticate/authenticate.component.jsx';
 import DirectFlights from './components/routes/directflights/directflights.component.jsx';

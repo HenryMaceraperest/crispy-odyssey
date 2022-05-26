@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import SearchContainer from '../../search-container/search-container.component';
+import SearchContainer from '../../components/search-component/search-component.component';
 
 const Home = () => {
     return (
