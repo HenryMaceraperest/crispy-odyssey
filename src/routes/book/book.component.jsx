@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { db } from '../../utils/firebase/firebase.utils';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 import { selectBookingID, selectBookings } from '../../store/booking/booking.selector';
 import { setBookingID } from '../../store/booking/booking.action';
@@ -47,34 +49,30 @@ const BookingPage = () => {
 
     const navigate = useNavigate();
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
-        const data = {
-            from: from,
-            to: to,
-            distance: flightDistance,
-            startDate: startDate,
-            endDate: endDate,
-            flightDuration: travelTime,
-            cost: price,
-            company: flightCompany,
-            flightRoutes: flightFromTos,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            bookingID: randomBookingID
-        }
-
-        axios
-            .post('http://localhost:4000/booking', data)
-            .then((res) => {
-                if (res.status === 200)
-                    navigate('/')
+        try {
+            await addDoc(collection(db, 'bookings'), {
+                from: from,
+                to: to,
+                distance: flightDistance,
+                startDate: startDate,
+                endDate: endDate,
+                flightDuration: travelTime,
+                cost: price,
+                company: flightCompany,
+                flightRoutes: flightFromTos,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                bookingID: randomBookingID,
+                created: Timestamp.now()
             })
-            .catch((err) => { console.log(err) });
-
-
+            navigate('/')
+        } catch (e) {
+            alert(e)
+        }
     };
 
 
