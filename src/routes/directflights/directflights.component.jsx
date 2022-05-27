@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectProducts } from '../../../store/product/product.selector';
-import { setProducts } from '../../../store/product/product.action';
-import FlightCard from '../../flight-card/flight-card.component';
+import { selectProducts } from '../../store/product/product.selector';
+import { setProducts } from '../../store/product/product.action';
+import FlightCard from '../../components/flight-card/flight-card.component';
 
 const DirectFlights = () => {
     const dispatch = useDispatch();

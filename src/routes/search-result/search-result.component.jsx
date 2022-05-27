@@ -5,13 +5,13 @@ import axios from "axios";
 
 import './search-result.styles.scss';
 
-import DirectFlightCard from "../../direct-flight-card/direct-flight-card.component";
-import ConnectingFlightCard from "../../connecting-flight-card/connecting-flight-card.component";
-import WrongRoute404 from "../../404-pages/wrong-route/wrong-route.component";
-import Custom400Error from "../../404-pages/custom-400/custom-400.component";
-import ChangeDate from "../../change-date-card/change-date.component";
+import DirectFlightCard from "../../components/direct-flight-card/direct-flight-card.component";
+import ConnectingFlightCard from "../../components/connecting-flight-card/connecting-flight-card.component";
+import WrongRoute404 from "../../components/404-pages/wrong-route/wrong-route.component";
+import Custom400Error from "../../components/404-pages/custom-400/custom-400.component";
+import ChangeDate from "../../components/change-date-card/change-date.component";
 
-import { setValidity } from "../../../store/validity/validity.action";
+import { setValidity } from "../../store/validity/validity.action";
 
 const SearchResult = () => {
     const [OGflights, setOGFlights] = useState([]);

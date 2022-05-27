@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import { selectBookingID, selectBookings } from '../../../store/booking/booking.selector';
-import { setBookingID } from '../../../store/booking/booking.action';
+import { selectBookingID, selectBookings } from '../../store/booking/booking.selector';
+import { setBookingID } from '../../store/booking/booking.action';
 
 import './book.styles.scss';
 
