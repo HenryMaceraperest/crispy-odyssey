@@ -54,9 +54,17 @@ const SearchResult = () => {
                     const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}`);
                     setOGFlights(response.data);
                 } else {
-                    const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`);
-                    setOGFlights(response.data)
-                    //response.data[0].directFlight ? setConnectingFlight(false) : setConnectingFlight(true)
+                    await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`)
+                        .then(response => setOGFlights(response.data))
+                        .catch(function (error) {
+                            if (error.response) {
+                                console.log(error.response.data);
+                                console.log(error.response.status);
+                            } else {
+                                console.log('Error', error.message);
+                            }
+                            console.log(error.config);
+                        });
                 }
             } catch (error) {
                 console.error(error);
@@ -113,7 +121,8 @@ const SearchResult = () => {
     if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
         return (
             <div>
-                {flights.length > 1 ?
+                {!flights ? <div>{dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}</div>
+                    :
                     <div className="search-body">
                         <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
                         <div className='sorting-div'>
@@ -140,7 +149,7 @@ const SearchResult = () => {
                         <h2>{flights.map(flight =>
                             <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
                     </div>
-                    : <div>{dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}</div>}
+                }
             </div>
         )
 
@@ -151,7 +160,8 @@ const SearchResult = () => {
     } else if ((FQ === 'earth' && (TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus'))) {
         return (
             <div>
-                {flights.length > 1 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}
+                <div>{<ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}</div>
+                {flights.length > 0 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>Sorry, no flight on this route and this date. Please check other dates!</div>}
             </div>
         )
     } else

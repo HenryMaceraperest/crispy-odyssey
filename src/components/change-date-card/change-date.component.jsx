@@ -23,9 +23,8 @@ const ChangeDate = ({ from, to, date }) => {
 
     return (
         <div className='main-div'>
-            <p className='paragraph'>No flights for this route and date, please check another date!</p>
-            {timeNow < oldDate1 ? <button className='button' onClick={() => previousDayClickHandler()}>Previous day</button> : ''}
-            <button className='button' onClick={() => nextDayClickHandler()}>Next day</button>
+            {timeNow < oldDate1 ? <button className='button' onClick={() => previousDayClickHandler()}>Previous day, {previousDate}</button> : ''}
+            <button className='button' onClick={() => nextDayClickHandler()}>Next day, {nextDate}</button>
         </div>
     )
 }
