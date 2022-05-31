@@ -12,6 +12,7 @@ import DirectFlights from './routes/directflights/directflights.component.jsx';
 import SearchResult from './routes/search-result/search-result.component.jsx';
 import BookingPage from './routes/book/book.component.jsx';
 import Default404 from './components/404-pages/default/default-404.component';
+import ViewBookingPage from './routes/view-booking/view-booking.component';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const App = () => {
         <Route path='/directflights' element={<DirectFlights />} />
         <Route path='/search' element={<SearchResult />} />
         <Route path='/book' element={<BookingPage />} />
+        <Route path='/viewbookings' element={<ViewBookingPage />} />
         <Route path='*' element={<Default404 />} />
       </Route>
     </Routes>
