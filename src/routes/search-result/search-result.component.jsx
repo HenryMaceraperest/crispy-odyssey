@@ -50,10 +50,10 @@ const SearchResult = () => {
         const fetch = async () => {
             try {
                 if (!dateQuery) {
-                    const response = await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}`);
+                    const response = await axios.get(`http://localhost:4000/searchresult?from=${fromQuery}&to=${toQuery}`);
                     setOGFlights(response.data);
                 } else {
-                    await axios.get(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`)
+                    await axios.get(`http://localhost:4000/searchresult?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`)
                         .then(response => setOGFlights(response.data))
                         .catch(function (error) {
                             if (error.response) {
@@ -120,10 +120,11 @@ const SearchResult = () => {
     if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
         return (
             <div>
-                {!flights ? <div>{dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}</div>
+                {!flights ? <div>{<ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}</div>
                     :
                     <div className="search-body">
                         <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
+                        <div>{<ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}</div>
                         <div className='sorting-div'>
                             <span className='sorting-span'>
                                 <p>Company:</p>
@@ -145,8 +146,8 @@ const SearchResult = () => {
                                 <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
                             </span>
                         </div>
-                        <h2>{flights.map(flight =>
-                            <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />)}</h2>
+                        <h2>{flights.length > 0 ? flights.map(flight =>
+                            <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />) : <div>Sorry, no flights for this route for this day!</div>}</h2>
                     </div>
                 }
             </div>

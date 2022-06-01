@@ -28,12 +28,12 @@ export const fetchSearchResultAsync = () => async (dispatch) => {
         const toQuery = useSelector(selectSearchResultToQuery);
 
         if (dateQuery === null) {
-            await fetch(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}`)
+            await fetch(`http://localhost:4000/searchresult?from=${fromQuery}&to=${toQuery}`)
                 .then((response) => response.json())
                 .then((result) => dispatch(fetchSearchResultSuccess(result)))
                 .catch((error) => console.log("An error occured!" + error))
         } else {
-            await fetch(`http://localhost:4000/searchres?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`)
+            await fetch(`http://localhost:4000/searchresult?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`)
                 .then((response) => response.json())
                 .then((result) => dispatch(fetchSearchResultSuccess(result)))
                 .then((result) => result.data[0].directFlight ? setSearchResultConnectingFlight(false) : setSearchResultConnectingFlight(true))
