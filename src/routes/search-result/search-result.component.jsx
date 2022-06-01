@@ -7,7 +7,6 @@ import './search-result.styles.scss';
 
 import DirectFlightCard from "../../components/direct-flight-card/direct-flight-card.component";
 import ConnectingFlightCard from "../../components/connecting-flight-card/connecting-flight-card.component";
-import WrongRoute404 from "../../components/404-pages/wrong-route/wrong-route.component";
 import Custom400Error from "../../components/404-pages/custom-400/custom-400.component";
 import ChangeDate from "../../components/change-date-card/change-date.component";
 
@@ -166,7 +165,7 @@ const SearchResult = () => {
         )
     } else
         return (
-            <WrongRoute404 from={fromQuery} to={toQuery} />
+            <Custom400Error bigText={`SORRY, WE DON'T OFFER THESE ROUTES`} smallText={`${fromQuery} => ${toQuery}`} />
         )
 };
 

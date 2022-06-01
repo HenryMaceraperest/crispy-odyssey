@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot, where } from "firebase/firestore";
+
+import BookingCard from "../../components/view-booking-card/view-booking-card.component";
 import { db } from "../../utils/firebase/firebase.utils";
 
-import './view-booking.styles.scss';
+import './find-booking.styles.scss';
 
-const ViewBookingPage = () => {
+const FindBookingPage = () => {
     const [lastName, setLastName] = useState('');
     const [bookingID, setBookingID] = useState('');
 
@@ -32,17 +34,9 @@ const ViewBookingPage = () => {
                 <label htmlFor="booking-id" className='form-label'>Booking ID: </label>
                 <input className='form-input' type="text" name="booking-id" id="booking-id" onChange={(e) => { setBookingID(e.target.value) }} />
             </div>
-            <div>{bookings.map((booking) => (
-                <div id={booking.data.bookingID}>
-                    <p>{booking.data.bookingID}</p>
-                    <p>{booking.data.firstName}</p>
-                    <p>{booking.data.lastName}</p>
-                    <p>{booking.data.cost}</p>
-                    <p>{booking.data.startDate}</p>
-                </div>
-            ))}</div>
+            <div>{bookings.map((booking) => <BookingCard id={booking.id} booking={booking.data} />)}</div>
         </div>
     )
 }
 
-export default ViewBookingPage;
+export default FindBookingPage;
