@@ -1,21 +1,73 @@
-.card-wrapper{
+.card-wrapper {
+    overflow: hidden;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     border: 1px solid white;
     margin: 20px;
     padding: 20px 10px;
-    justify-content: center;
+    border-radius: 15px;
+    margin: 30px 10vw;
+    color: white;
+    background-color: rgb(83, 4, 83);
 
-    .card-component{
+    background-image: linear-gradient(to top, rgb(139, 6, 139) 50%, rgb(83, 4, 83) 50%);
+    background-position: 0% -100%;
+    background-size: 200% 200%;
+    background-repeat: no-repeat;
+    transition: all .5s ease;
+
+    .card-component {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         font-size: 14px;
         color: white;
         margin-right: 5vw;
         text-align: center;
+
+        p {
+            margin: 5px 0;
+        }
+
+        .book-flight-text {
+            margin-bottom: 0px;
+            transition: all 0.5s ease;
+            visibility: hidden;
+            opacity: 0;
+        }
     }
-    
-    .card-button{
-        margin-top: 15px;
+
+    .card-component-price {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 14px;
+        color: white;
+        margin-right: 5vw;
+        text-align: center;
+
+        p {
+            margin: 5px 0;
+        }
+
+        .price-text {
+            margin-left: 0;
+            transition: all .5s ease;
+        }
+    }
+
+    &:hover {
+        background-position: 0% 100%;
+        cursor: pointer;
+
+        .price-text {
+            margin-left: 25px;
+        }
+
+        .book-flight-text {
+            visibility: visible;
+            opacity: 1;
+        }
     }
 }

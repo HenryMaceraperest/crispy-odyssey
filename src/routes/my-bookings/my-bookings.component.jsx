@@ -33,8 +33,8 @@ const MyBookingsPage = () => {
     return (
         <div>
             {currentUser ?
-                <div>{bookings.length > 0 ? bookings.map((booking) => (<BookingCard id={booking.id} booking={booking.data} />)) : <div>No bookings made yet!</div>}</div>
-                : <div>Please log in to view your bookings!</div>}
+                <div>{bookings.length > 0 ? bookings.map((booking) => (<BookingCard id={booking.id} booking={booking.data} />)) : <div className="booking-text">No bookings made yet!</div>}</div>
+                : <div className="booking-text">Please log in to view your bookings!</div>}
         </div>
     )
 }

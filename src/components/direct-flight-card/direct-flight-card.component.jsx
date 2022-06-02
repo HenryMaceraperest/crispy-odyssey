@@ -54,33 +54,24 @@ const DirectFlightCard = ({ flight, from, to }) => {
 
 
     return (
-        <div className='card-wrapper'>
+        <div className='card-wrapper' onClick={historyClickHandler}>
             <div className='card-component'>
-                <label>Company:</label>
-                <p>{company.name}</p>
+                <p>&#x1F680; {company.name}</p>
             </div>
             <div className='card-component'>
-                <label>Ticket cost:</label>
-                <p>€{price}</p>
-            </div>
-            <div className='card-component'>
-                <label>Flight start: </label>
                 <p>{start.toLocaleDateString('en-GB', options)}</p>
-            </div>
-            <div className='card-component'>
-                <label>Flight end:</label>
+
                 <p>{end.toLocaleDateString('en-GB', options)}</p>
             </div>
             <div className='card-component'>
-                <label>Total flight time:</label>
+                <p>{distance} km</p>
                 <p>{travelTime}</p>
             </div>
-            <div className='card-component'>
-                <label>Distance:</label>
-                <p>{distance} km</p>
+            <div className='card-component-price'>
+                <p className='price-text'>€ {price}</p>
             </div>
-            <div className='card-button'>
-                <button onClick={historyClickHandler}>Book this flight!</button>
+            <div className='card-component'>
+                <p className='book-flight-text'>Book flight?</p>
             </div>
         </div>
     );

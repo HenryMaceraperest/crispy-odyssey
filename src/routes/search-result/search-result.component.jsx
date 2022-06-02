@@ -18,13 +18,13 @@ const SearchResult = () => {
     const search = location.search;
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
-    let dateQuery = new URLSearchParams(search).get('date');
+    const dateQuery = new URLSearchParams(search).get('date');
 
-    const dateIsValid = dateQuery instanceof Date && !!dateQuery.getDate();
+    /* const dateIsValid = dateQuery instanceof Date && !!dateQuery.getDate();
 
     if (!dateIsValid) {
         dateQuery = new Date().toISOString().split('T')[0];
-    }
+    } */
 
     const dispatch = useDispatch();
 
@@ -53,9 +53,6 @@ const SearchResult = () => {
         const toQuery = new URLSearchParams(search).get('to');
         const dateQuery = new URLSearchParams(search).get('date');
 
-        if (!dateQuery) {
-            return;
-        }
         const fetch = async () => {
             try {
                 if (!dateQuery) {
@@ -128,34 +125,32 @@ const SearchResult = () => {
 
     if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
         return (
-            <div>
-                <div className="search-body">
-                    <h1>From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
-                    <div>{dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}</div>
-                    <div className='sorting-div'>
-                        <span className='sorting-span'>
-                            <p>Company:</p>
-                            <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
-                        </span>
-                        <span className='sorting-span'>
-                            <p>Price:</p>
-                            <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
-                            <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
-                        </span>
-                        <span className='sorting-span'>
-                            <p>Date:</p>
-                            <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
-                            <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
-                        </span>
-                        <span className='sorting-span'>
-                            <p>Travel time:</p>
-                            <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
-                            <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
-                        </span>
-                    </div>
-                    <h2>{flights.length > 0 ? flights.map(flight =>
-                        <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />) : <div>{`Sorry, no flights for ${fromQuery} - ${toQuery} on ${dateQuery}!`}</div>}</h2>
+            <div className="search-body">
+                <h1 className="title">From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
+                <div>{dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}</div>
+                <div className='sorting-div'>
+                    <span className='sorting-span'>
+                        <p>Company:</p>
+                        <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
+                    </span>
+                    <span className='sorting-span'>
+                        <p>Price:</p>
+                        <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
+                        <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
+                    </span>
+                    <span className='sorting-span'>
+                        <p>Date:</p>
+                        <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
+                        <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
+                    </span>
+                    <span className='sorting-span'>
+                        <p>Travel time:</p>
+                        <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
+                        <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
+                    </span>
                 </div>
+                <h2>{flights.length > 0 ? flights.map(flight =>
+                    <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />) : <div className="false-text">{`Sorry, no flights available!`}</div>}</h2>
             </div>
         )
 
@@ -169,7 +164,7 @@ const SearchResult = () => {
                 <div>{<ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}</div>
 
                 {/* for some reason connecting flights doesnt update the page when you change the date, unlike direct flights */}
-                {flights.length > 0 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div>{`Sorry, no flights for ${fromQuery} - ${toQuery} on ${dateQuery}!`}</div>}
+                {flights.length > 0 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div className="false-text">{`Sorry, no flights for ${fromQuery} - ${toQuery} on ${dateQuery}!`}</div>}
             </h2>
         )
     } else
