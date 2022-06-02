@@ -1,9 +1,17 @@
 import React from "react";
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from "../../utils/firebase/firebase.utils";
 
 import './view-booking-card.styles.scss';
 
-const BookingCard = ({ booking }) => {
+const BookingCard = ({ booking, id }) => {
     const { from, to, distance, startDate, endDate, flightDuration, cost, company, flightRoutes, firstName, lastName, bookingID } = booking;
+
+    const deleteClickHandler = async () => {
+        const bookingsRef = doc(db, 'bookings', id);
+
+        await deleteDoc(bookingsRef);
+    }
 
     return (
         <div className="booking-container">
@@ -14,7 +22,7 @@ const BookingCard = ({ booking }) => {
                     </div>
                     <div className="name-container">
                         <span className="name-text">Booking for:</span>
-                        <p className="name-text"> {firstName} {lastName}</p>
+                        <p className="name-text">{lastName}, {firstName}</p>
                     </div>
                 </div>
                 <div className="second-container">
@@ -30,7 +38,7 @@ const BookingCard = ({ booking }) => {
                         </div>
                     </div>
                     <div className="company-info">
-                        <p>{company ? company.map(flightProvider => (<p>{flightProvider}</p>)) : ''}</p>
+                        <div>{company ? company.map(flightProvider => (<p>{flightProvider}</p>)) : ''}</div>
                     </div>
                 </div>
                 <div className="third-container">
@@ -39,14 +47,13 @@ const BookingCard = ({ booking }) => {
                         <span className="geo-span">{flightDuration}</span>
                     </div>
                     <div className="flight-routes">
-                        <p>{flightRoutes ? <p className="flight-data">Routes:</p> : ''}</p>
-                        <p>{flightRoutes ? flightRoutes.map(flightRoute => <p className="flight-data">{flightRoute.flightFrom} - {flightRoute.flightTo}</p>) : ''}</p>
+                        <div>{flightRoutes ? <p className="flight-data">Routes:</p> : ''}</div>
+                        <div>{flightRoutes ? flightRoutes.map(flightRoute => <p className="flight-data">{flightRoute.flightFrom} - {flightRoute.flightTo}</p>) : ''}</div>
                     </div>
-
                 </div>
             </div>
             <div className="cost">
-                <button className="button-button" onClick={console.log('Deleted!')}>Delete</button>
+                <button className="button-button" onClick={() => deleteClickHandler()}>Delete</button>
                 <p>Total: € {cost}.</p>
             </div>
         </div>

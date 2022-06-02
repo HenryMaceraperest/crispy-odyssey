@@ -15,6 +15,9 @@ const MyBookingsPage = () => {
     const currentUser = useSelector(selectCurrentUser);
 
     useEffect(() => {
+        if (!currentUser) {
+            return;
+        }
         const bookingsRef = collection(db, 'bookings');
         const q = query(bookingsRef, where("email", "==", currentUser.email), orderBy('created', 'desc'))
         const findBookings = async () => await onSnapshot(q, (querySnapshot) => {
@@ -29,7 +32,9 @@ const MyBookingsPage = () => {
 
     return (
         <div>
-            <div>{bookings.map((booking) => (<BookingCard id={booking.id} booking={booking.data} />))}</div>
+            {currentUser ?
+                <div>{bookings.length > 0 ? bookings.map((booking) => (<BookingCard id={booking.id} booking={booking.data} />)) : <div>No bookings made yet!</div>}</div>
+                : <div>Please log in to view your bookings!</div>}
         </div>
     )
 }

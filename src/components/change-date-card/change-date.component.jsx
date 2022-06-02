@@ -5,11 +5,15 @@ import './change-date.styles.scss';
 const ChangeDate = ({ from, to, date }) => {
     const timeNow = new Date();
     const navigate = useNavigate();
+
     const oldDate1 = new Date(date);
     const oldDate2 = new Date(date);
 
+    //const dateIsValid = date instanceof Date &&  !!date.getDate();
+
     oldDate1.setDate(oldDate1.getDate() + 1);
     oldDate2.setDate(oldDate2.getDate() - 1);
+
     const nextDate = oldDate1.toISOString().split('T')[0];
     const previousDate = oldDate2.toISOString().split('T')[0];
 

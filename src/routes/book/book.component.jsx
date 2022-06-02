@@ -64,7 +64,7 @@ const BookingPage = () => {
                 company: flightCompany,
                 flightRoutes: flightFromTos,
                 firstName: firstName,
-                lastName: lastName,
+                lastName: lastName.toUpperCase(),
                 email: email,
                 bookingID: randomBookingID,
                 created: Timestamp.now()
