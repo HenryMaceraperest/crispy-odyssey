@@ -9,8 +9,6 @@ import './find-booking.styles.scss';
 const FindBookingPage = () => {
     const [lastName, setLastName] = useState('');
     const [bookingID, setBookingID] = useState('');
-
-    //const [openAddModal, setOpenAddModal] = useState(false);
     const [bookings, setBookings] = useState([]);
 
     useEffect(() => {

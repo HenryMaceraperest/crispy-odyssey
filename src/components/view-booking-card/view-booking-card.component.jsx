@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from "../../utils/firebase/firebase.utils";
 
@@ -12,10 +13,14 @@ const BookingCard = ({ booking, id }) => {
 
         await deleteDoc(bookingsRef);
     }
+    const navigate = useNavigate()
+    const onClickHandler = () => {
+        navigate(`/viewbooking?lastName=${lastName}&bookingID=${bookingID}`)
+    }
 
     return (
         <div className="booking-container">
-            <div className="inner-container">
+            <div onClick={() => onClickHandler()} className="inner-container">
                 <div className="first-container">
                     <div className="booking-id">
                         <p className="id-text">{bookingID}</p>
@@ -54,7 +59,7 @@ const BookingCard = ({ booking, id }) => {
             </div>
             <div className="cost">
                 <button className="button-button" onClick={() => deleteClickHandler()}>Delete</button>
-                <p>Total: € {cost}.</p>
+                <p>€ {cost}</p>
             </div>
         </div>
     )

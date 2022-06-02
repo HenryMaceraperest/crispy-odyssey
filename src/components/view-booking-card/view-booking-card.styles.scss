@@ -3,10 +3,10 @@
     border-radius: 15px;
     margin: 30px 10vw;
     color: white;
-    background-color: rgb(139, 6, 139);
+    background-color: rgb(117, 6, 117);
     max-width: 70vw;
 
-    background-image: linear-gradient(to top, rgb(83, 4, 83) 50%, rgb(139, 6, 139) 50%);
+    background-image: linear-gradient(to top, rgb(83, 4, 83) 50%, rgb(117, 6, 117) 50%);
     background-position: 0% -100%;
     background-size: 200% 200%;
     background-repeat: no-repeat;
@@ -19,6 +19,8 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        cursor: pointer;
+
 
         .first-container {
             display: flex;
@@ -148,16 +150,16 @@
         border-radius: 0px 0px 15px 15px;
 
         .button-button {
-            background-color: rgba(128, 0, 128, 0.966);
+            background-color: rgb(83, 4, 83);
             opacity: 0.8;
             padding: 15px 30px;
             border-radius: 15px;
             color: white;
             transition: top ease 0.3s;
-            margin-left: 10px;
+            margin: 15px 10px;
 
             &:hover {
-                background-color: rgb(128, 0, 128);
+                background-color: rgba(110, 1, 110, 0.938);
                 top: -8px;
                 cursor: pointer;
             }
