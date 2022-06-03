@@ -5,10 +5,10 @@ import axios from "axios";
 
 import './search-result.styles.scss';
 
-import DirectFlightCard from "../../components/direct-flight-card/direct-flight-card.component";
-import ConnectingFlightCard from "../../components/connecting-flight-card/connecting-flight-card.component";
-import Custom400Error from "../../components/404-pages/custom-400/custom-400.component";
-import ChangeDate from "../../components/change-date-card/change-date.component";
+import DirectFlightCard from "../../components/search-result-page-components/main-components/direct-flight-card/direct-flight-card.component";
+import ConnectingFlightCard from "../../components/search-result-page-components/main-components/connecting-flight-card/connecting-flight-card.component";
+import Custom400Error from "../../components/common-components/main-components/custom-error-400-page/custom-400.component";
+import ChangeDate from "../../components/search-result-page-components/main-components/change-date/change-date.component";
 
 import { setValidity } from "../../store/validity/validity.action";
 
@@ -31,7 +31,7 @@ const SearchResult = () => {
 
     useEffect(() => {
         const getData = async () => {
-            await axios.get('http://localhost:4000/time')
+            await axios.get(process.env.REACT_APP_VALIDUNTIL_API)
                 .then(
                     validity => {
                         dispatch(setValidity(validity.data))
@@ -52,14 +52,15 @@ const SearchResult = () => {
         const fromQuery = new URLSearchParams(search).get('from');
         const toQuery = new URLSearchParams(search).get('to');
         const dateQuery = new URLSearchParams(search).get('date');
+        const API_URL = process.env.REACT_APP_SEARCH_RESULT_API;
 
         const fetch = async () => {
             try {
                 if (!dateQuery) {
-                    const response = await axios.get(`http://localhost:4000/searchresult?from=${fromQuery}&to=${toQuery}`);
+                    const response = await axios.get(`${API_URL}?from=${fromQuery}&to=${toQuery}`);
                     setOGFlights(response.data);
                 } else {
-                    await axios.get(`http://localhost:4000/searchresult?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`)
+                    await axios.get(`${API_URL}?from=${fromQuery}&to=${toQuery}&date=${dateQuery}`)
                         .then(response => setOGFlights(response.data))
                         .catch(function (error) {
                             if (error.response) {

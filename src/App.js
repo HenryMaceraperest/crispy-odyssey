@@ -6,15 +6,15 @@ import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/
 import { setCurrentUser } from './store/user/user.action';
 
 import Home from './routes/home/home.component.jsx';
-import Navigation from './components/navigation/navigation.component.jsx';
+import Navigation from './components/common-components/main-components/navigation/navigation.component.jsx';
 import Authenticate from './routes/authenticate/authenticate.component.jsx';
 import DirectFlights from './routes/directflights/directflights.component.jsx';
 import SearchResult from './routes/search-result/search-result.component.jsx';
-import BookingPage from './routes/book/book.component.jsx';
-import Custom400Error from './components/404-pages/custom-400/custom-400.component';
-import FindBookingPage from './routes/find-booking/find-booking.component';
-import MyBookingsPage from './routes/my-bookings/my-bookings.component';
-import ViewBookingPage from './routes/view-booking/view-booking.component';
+import MakeBookingPage from './routes/bookings/make-booking/make-booking.component.jsx';
+import Custom400Error from './components/common-components/main-components/custom-error-400-page/custom-400.component';
+import FindBookingPage from './routes/bookings/find-booking/find-booking.component';
+import MyBookingsPage from './routes/bookings/my-bookings/my-bookings.component';
+import ViewSingleBookingPage from './routes/bookings/view-single-booking/view-single-booking.component';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,10 +36,10 @@ const App = () => {
         <Route path='/auth' element={<Authenticate />} />
         <Route path='/directflights' element={<DirectFlights />} />
         <Route path='/search' element={<SearchResult />} />
-        <Route path='/book' element={<BookingPage />} />
-        <Route path='/findbookings' element={<FindBookingPage />} />
+        <Route path='/book' element={<MakeBookingPage />} />
+        <Route path='/find-booking' element={<FindBookingPage />} />
         <Route path='/mybookings' element={<MyBookingsPage />} />
-        <Route path='/viewbooking' element={<ViewBookingPage />} />
+        <Route path='/viewbooking' element={<ViewSingleBookingPage />} />
         <Route path='*' element={<Custom400Error bigText={'404'} smallText={`The page you're looking for is in another galaxy.`} />} />
       </Route>
     </Routes>

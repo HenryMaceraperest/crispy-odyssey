@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { selectProducts } from '../../store/product/product.selector';
 import { setProducts } from '../../store/product/product.action';
-import FlightCard from '../../components/flight-card/flight-card.component';
+import FlightCard from '../../components/direct-flights-page-components/main-components/flight-card/flight-card.component';
 
 const DirectFlights = () => {
     const dispatch = useDispatch();
