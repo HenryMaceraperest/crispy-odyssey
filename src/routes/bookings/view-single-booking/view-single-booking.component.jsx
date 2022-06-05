@@ -27,7 +27,7 @@ const ViewSingleBookingPage = () => {
     if (booking.length > 0) {
         return (
             <div className="view-booking-container">
-                <div><SingleBookingCard id={booking.id} booking={booking[0].data} /></div>
+                <div><SingleBookingCard id={booking[0].id} booking={booking[0].data} /></div>
             </div>
         )
     } else {

@@ -1,0 +1,142 @@
+.outer-container {
+    min-width: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .single-booking-container {
+        color: white;
+        width: 80vw;
+        margin-left: 8vw;
+        font-size: 2rem;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid white;
+        border-radius: 15px;
+        background-color: rgb(134, 2, 134);
+
+        .inner-container {
+            margin: 1vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .first-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .booking-id {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+
+                    .id-text {
+                        padding: 1vw;
+                    }
+                }
+
+                .name-container {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+
+                    .name-text {
+                        padding: 1vw;
+
+                    }
+                }
+
+                .image-container {
+                    padding: 1vw;
+                }
+            }
+
+            .second-container {
+                padding-left: 1vw;
+
+                p {
+                    margin-top: 0;
+
+                }
+            }
+
+            .third-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0 1vw;
+
+                .location-data {
+                    .from-data {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                    }
+                }
+            }
+
+            .fourth-container {
+                padding: 1vw 0 0 1vw;
+
+                .geo-data {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 4vh 0;
+                }
+            }
+
+            .fifth-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-bottom: 2vh;
+
+                .flight-routes {
+                    display: flex;
+                    flex-direction: column;
+
+                    .flight-data {
+                        margin: 0;
+                        padding-left: 1vw;
+                    }
+                }
+
+                .company-info {
+                    display: flex;
+                    flex-direction: column;
+
+                    .company-data {
+                        margin: 0;
+                        padding-right: 1vw;
+                    }
+                }
+            }
+        }
+    }
+
+    .btn-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+
+        .button {
+            margin-top: 2vh;
+            font-size: 1.5rem;
+            padding: 1rem;
+            background-color: rgb(105, 1, 105);
+            color: white;
+            border: 2px solid white;
+            border-radius: 15px;
+            transition: all .1s ease;
+
+
+            &:hover {
+                cursor: pointer;
+                background-color: rgb(134, 2, 134);
+                margin-top: 1.7vh;
+            }
+        }
+    }
+}

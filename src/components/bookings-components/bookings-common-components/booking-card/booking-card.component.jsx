@@ -1,26 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { doc, deleteDoc } from 'firebase/firestore';
-import { db } from "../../../../utils/firebase/firebase.utils";
 
 import './booking-card.styles.scss';
 
 const BookingCard = ({ booking, id }) => {
     const { from, to, distance, startDate, endDate, flightDuration, cost, company, flightRoutes, firstName, lastName, bookingID } = booking;
-
-    const deleteClickHandler = async () => {
-        const bookingsRef = doc(db, 'bookings', id);
-
-        await deleteDoc(bookingsRef);
-    }
     const navigate = useNavigate()
     const onClickHandler = () => {
         navigate(`/viewbooking?last-name=${lastName}&bookingID=${bookingID}`)
     }
 
     return (
-        <div className="booking-container">
-            <div onClick={() => onClickHandler()} className="inner-container">
+        <div className="booking-container" onClick={() => onClickHandler()}>
+            <div className="inner-container">
                 <div className="first-container">
                     <div className="booking-id">
                         <p className="id-text">{bookingID}</p>
@@ -58,7 +50,6 @@ const BookingCard = ({ booking, id }) => {
                 </div>
             </div>
             <div className="cost">
-                <button className="button-button" onClick={() => deleteClickHandler()}>Delete</button>
                 <p>€ {cost}</p>
             </div>
         </div>

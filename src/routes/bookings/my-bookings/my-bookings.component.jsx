@@ -31,7 +31,7 @@ const MyBookingsPage = () => {
     }, [currentUser])
 
     return (
-        <div>
+        <div className="booking-body">
             {currentUser ?
                 <div>{bookings.length > 0 ? bookings.map((booking) => (<BookingCard id={booking.id} booking={booking.data} />)) : <div className="booking-text">No bookings made yet!</div>}</div>
                 : <div className="booking-text">Please log in to view your bookings!</div>}
