@@ -10,7 +10,7 @@ const DirectFlights = () => {
 
     useEffect(() => {
         const getData = async () => {
-            await fetch('http://localhost:4000')
+            await fetch(process.env.REACT_APP_ROUTES_API)
                 .then((response) => response.json())
                 .then((result) => dispatch(setRoutes(result)))
                 .catch((error) => console.log("An error occured!" + error))

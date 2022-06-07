@@ -6,7 +6,7 @@
     }
 
     .sorting-div {
-        height: 8vh;
+        min-height: 8vh;
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -46,4 +46,5 @@
     color: white;
     text-align: center;
     font-size: 2rem;
+    height: 92vh;
 }
