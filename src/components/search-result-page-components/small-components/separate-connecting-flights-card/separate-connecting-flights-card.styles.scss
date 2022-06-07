@@ -1,10 +1,15 @@
-.card-wrapper {
+.card-wrappper {
     display: flex;
     flex-direction: row;
     border: 1px solid white;
     margin: 20px;
     padding: 20px 10px;
+    border-radius: 15px;
     justify-content: center;
+    background-color: rgb(83, 4, 83);
+    background-position: 0% -100%;
+    background-size: 200% 200%;
+    background-repeat: no-repeat;
 
     .card-component {
         display: flex;
@@ -13,5 +18,9 @@
         color: white;
         margin-right: 5vw;
         text-align: center;
+    }
+
+    &:hover {
+        cursor: default;
     }
 }

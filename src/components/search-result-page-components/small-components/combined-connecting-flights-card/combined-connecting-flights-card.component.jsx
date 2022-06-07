@@ -76,7 +76,7 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
     };
 
     return (
-        <div className='card-wrapper'>
+        <div className='card-wrrapper' onClick={() => historyClickHandler()}>
             <div className='card-component'>
                 <label>Companies:</label>
                 <div>{collectionCompanies.map(
@@ -117,9 +117,6 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
             <div className='card-component'>
                 <label>Combined travel distance:</label>
                 <p>{sum2} km</p>
-            </div>
-            <div className='card-button'>
-                <button onClick={() => historyClickHandler()}>Book this flight!</button>
             </div>
         </div>
     );
