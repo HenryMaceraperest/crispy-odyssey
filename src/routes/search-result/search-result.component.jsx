@@ -157,13 +157,11 @@ const SearchResult = () => {
 
     } else if (!dateQuery && ((FQ === 'earth' && (TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')))) {
         return (
-            <div className="search-body">
-                <Custom400Error bigText={'TRY AGAIN!'} smallText={'FOR CONNECTING FLIGHTS, PLEASE SELECT A DATE!'} />
-            </div>
+            <Custom400Error bigText={'TRY AGAIN!'} smallText={'FOR CONNECTING FLIGHTS, PLEASE SELECT A DATE!'} />
         )
     } else if ((FQ === 'earth' && (TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus'))) {
         return (
-            <h2 className="search-body">
+            <h2>
                 <div>{<ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}</div>
 
                 {/* for some reason connecting flights doesnt update the page when you change the date, unlike direct flights */}
@@ -172,9 +170,7 @@ const SearchResult = () => {
         )
     } else
         return (
-            <div className="search-body">
-                <Custom400Error bigText={`SORRY, WE DON'T OFFER THESE ROUTES`} smallText={`${fromQuery} => ${toQuery}`} />
-            </div>
+            <Custom400Error bigText={`SORRY, WE DON'T OFFER THESE ROUTES`} smallText={`${fromQuery} => ${toQuery}`} />
         )
 };
 

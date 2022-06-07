@@ -1,0 +1,3 @@
+export const ROUTES_ACTION_TYPES = {
+    SET_ROUTES: 'SET_ROUTES'
+};

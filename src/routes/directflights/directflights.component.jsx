@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectProducts } from '../../store/product/product.selector';
-import { setProducts } from '../../store/product/product.action';
+import { selectRoutes } from '../../store/route/route.selector';
+import { setRoutes } from '../../store/route/route.action';
 import FlightCard from '../../components/direct-flights-page-components/main-components/flight-card/flight-card.component';
 
 const DirectFlights = () => {
@@ -12,7 +12,7 @@ const DirectFlights = () => {
         const getData = async () => {
             await fetch('http://localhost:4000')
                 .then((response) => response.json())
-                .then((result) => dispatch(setProducts(result)))
+                .then((result) => dispatch(setRoutes(result)))
                 .catch((error) => console.log("An error occured!" + error))
 
         };
@@ -21,7 +21,7 @@ const DirectFlights = () => {
 
     }, [dispatch]);
 
-    const products = useSelector(selectProducts);
+    const products = useSelector(selectRoutes);
 
     return (
         <div>

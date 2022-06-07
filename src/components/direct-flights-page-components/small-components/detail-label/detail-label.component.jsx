@@ -1,11 +1,11 @@
 import React from "react";
 import './detail-label.styles.scss';
 
-export const DetailLabel = (props) => {
+export const DetailLabel = ({ mainText, subText }) => {
     return (
         <div className="detail-label">
-            <h4>{props.mainText}</h4>
-            <p>{props.subText}</p>
+            <h4>{mainText}</h4>
+            <p>{subText}</p>
         </div>
     )
 };
