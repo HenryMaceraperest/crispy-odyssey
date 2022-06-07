@@ -6,7 +6,8 @@ body {
   //background-color: rgb(105, 1, 105);
   background-image: linear-gradient(rgb(105, 1, 105) 0%, rgb(0, 0, 0) 100%);
   background-repeat: no-repeat;
-  width: 95vw;
+  min-width: 95vw;
+  min-height: 100vh;
   background-size: cover;
   padding: 20px 40px;
 }
