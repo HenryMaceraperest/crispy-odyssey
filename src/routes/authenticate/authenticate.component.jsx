@@ -10,7 +10,7 @@ import './authenticate.styles.scss';
 
 const Authenticate = () => {
     const currentUser = useSelector(selectCurrentUser);
-    return (<div>{!currentUser ?
+    return (<div className='authentication-outer-container'>{!currentUser ?
         <div className='authentication-container'>
             <SignInForm />
             <SignUpForm />

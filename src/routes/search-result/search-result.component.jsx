@@ -150,7 +150,7 @@ const SearchResult = () => {
                         <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
                     </span>
                 </div>
-                <h2>{flights.length > 0 ? flights.map(flight =>
+                <h2 >{flights.length > 0 ? flights.map(flight =>
                     <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />) : <div className="false-text">{`Sorry, no flights available!`}</div>}</h2>
             </div>
         )

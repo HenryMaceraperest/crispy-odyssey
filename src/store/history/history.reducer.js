@@ -2,6 +2,7 @@ import { HISTORY_ACTION_TYPES } from "./history.types";
 
 const INITIAL_STATE = {
     isHistoryOpen: false,
+    isMenuOpen: true,
     historyItems: [],
     historyCount: 0
 };
@@ -18,6 +19,11 @@ export const historyReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isHistoryOpen: action.payload,
+            }
+        case HISTORY_ACTION_TYPES.SET_IS_MENU_OPEN:
+            return {
+                ...state,
+                isMenuOpen: action.payload,
             }
         default:
             return state;

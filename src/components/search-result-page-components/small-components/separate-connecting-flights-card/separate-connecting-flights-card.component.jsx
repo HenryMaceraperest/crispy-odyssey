@@ -30,7 +30,7 @@ const SeparateConnectingFlightsCard = ({ flight }) => {
     const travelTime = timeDiff(end, start);
 
     return (
-        <div className='card-wrappper'>
+        <div className='card-wrapper'>
             <div className='card-component'>
                 <label>Company:</label>
                 <p>{company.name}</p>

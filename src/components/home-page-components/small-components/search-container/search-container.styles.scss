@@ -1,6 +1,12 @@
-.searchbar-container{
+.searchbar-container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+
+    @media screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
     }
+}

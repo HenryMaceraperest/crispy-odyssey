@@ -1,4 +1,4 @@
-.button-container{
+.button-container {
     min-width: 165px;
     width: auto;
     height: 50px;
@@ -20,32 +20,38 @@
     justify-content: center;
     align-items: center;
 
-    &:hover{
+    @media screen and (max-width: 800px) {
+        min-width: 120px;
+        font-size: 12px;
+    }
+
+    &:hover {
         background-color: rgba(128, 0, 128, 0.671);
         color: white;
         border: 2px solid black;
     }
 
-    &.google-sign-in{
+    &.google-sign-in {
         background-color: #4285f4;
         color: white;
         border: 2px solid black;
 
-        &:hover{
+        &:hover {
             background-color: #357ae8;
             border: 3px solid black;
         }
     }
 
-    &.inverted{
+    &.inverted {
         background-color: white;
-        color: rgba(128, 0, 128, 0.966);;
+        color: rgba(128, 0, 128, 0.966);
+        ;
         border: 1px solid black;
 
-        &:hover{
+        &:hover {
             background-color: black;
             color: white;
-            border: none;   
+            border: none;
         }
     }
 }

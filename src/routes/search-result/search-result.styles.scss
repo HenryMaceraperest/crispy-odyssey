@@ -12,6 +12,11 @@
         justify-content: space-between;
         margin-bottom: 25px;
 
+        @media screen and (max-width: 800px) {
+            flex-direction: column;
+            min-width: 70vw;
+        }
+
         .sorting-span {
             width: 50%;
             height: 100%;
@@ -19,6 +24,11 @@
             align-items: center;
             justify-content: flex-end;
             color: rgba(255, 255, 255, 0.623);
+
+            @media screen and (max-width: 800px) {
+                width: 100%;
+                justify-content: space-between;
+            }
 
             .sorting-search-box {
                 margin-left: 15px;

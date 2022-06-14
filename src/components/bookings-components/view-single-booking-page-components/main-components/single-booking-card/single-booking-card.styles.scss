@@ -15,6 +15,11 @@
         border-radius: 15px;
         background-color: rgb(134, 2, 134);
 
+        @media screen and (max-width: 800px) {
+            font-size: 1rem;
+            margin-left: 0;
+        }
+
         .inner-container {
             margin: 1vw;
             display: flex;
@@ -25,6 +30,12 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+
+                @media screen and (max-width: 800px) {
+
+                    flex-direction: column-reverse;
+
+                }
 
                 .booking-id {
                     display: flex;
@@ -49,6 +60,12 @@
 
                 .image-container {
                     padding: 1vw;
+
+                    @media screen and (max-width: 800px) {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                    }
                 }
             }
 

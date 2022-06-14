@@ -54,7 +54,7 @@ const DirectFlightCard = ({ flight, from, to }) => {
 
 
     return (
-        <div className='card-wrapper' onClick={historyClickHandler}>
+        <div className='card-wraper' onClick={historyClickHandler}>
             <div className='card-component'>
                 <p>&#x1F680; {company.name}</p>
             </div>

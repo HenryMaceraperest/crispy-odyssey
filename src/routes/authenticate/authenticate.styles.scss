@@ -1,8 +1,17 @@
 .authentication-container {
     color: white;
     display: flex;
-    width: 80vw;
+    min-width: 70vw;
     justify-content: space-between;
+    text-align: center;
     margin: 30px auto;
-    height: 85vh;
+    min-height: 85vh;
+
+    @media screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 60vw;
+        margin: 30px 0;
+    }
 }

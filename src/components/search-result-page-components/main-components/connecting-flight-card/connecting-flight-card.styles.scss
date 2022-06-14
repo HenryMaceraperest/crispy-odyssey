@@ -1,21 +1,7 @@
-.card-wrapper {
+.connecting-flights-wrapper {
     display: flex;
-    flex-direction: row;
-    border: 1px solid white;
+    flex-direction: column;
     margin: 20px;
     padding: 20px 10px;
     justify-content: center;
-
-    .card-component {
-        display: flex;
-        flex-direction: column;
-        font-size: 14px;
-        color: white;
-        margin-right: 5vw;
-        text-align: center;
-    }
-
-    .card-button {
-        margin-top: 15px;
-    }
 }

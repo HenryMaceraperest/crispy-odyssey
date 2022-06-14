@@ -1,0 +1,25 @@
+.hamburger-icon-container {
+    display: flex;
+    border-radius: 15px;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    visibility: hidden;
+
+
+
+    @media screen and (max-width: 800px) {
+        visibility: visible;
+    }
+
+    .icon {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+}
+
+.toggled-icon {
+    background-color: rgb(83, 4, 83);
+}

@@ -16,6 +16,10 @@
     background-repeat: no-repeat;
     transition: all .5s ease;
 
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+    }
+
     .card-component {
         display: flex;
         flex-direction: column;
@@ -24,6 +28,21 @@
         color: white;
         margin-right: 5vw;
         text-align: center;
+
+        @media screen and (max-width: 1200px) {
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: start;
+            margin: 0 5vw;
+
+            white-space: nowrap;
+        }
+
+        .label {
+            text-align: center;
+            margin-top: 15px;
+            border-bottom: 1px solid white;
+        }
     }
 
     .card-button {

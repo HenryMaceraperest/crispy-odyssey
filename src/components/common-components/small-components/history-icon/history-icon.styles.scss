@@ -1,11 +1,21 @@
 .history-icon-container {
     width: 45px;
     height: 45px;
+    top: 20px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    @media screen and (max-width: 800px) {
+        width: 45px;
+        height: 45px;
+        position: absolute;
+        top: 20px;
+        left: 45vw;
+        z-index: 5;
+    }
 
     .icon {
         width: 24px;

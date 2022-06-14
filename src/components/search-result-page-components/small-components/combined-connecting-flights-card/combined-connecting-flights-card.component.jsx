@@ -77,47 +77,47 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
 
     return (
         <div className='card-wrrapper' onClick={() => historyClickHandler()}>
-            <div className='card-component'>
-                <label>Companies:</label>
+            <span className='card-component'>
+                <label className='label'>Companies:</label>
                 <div>{collectionCompanies.map(
                     x =>
                         <p key={x}>{x}</p>
                 )}</div>
-            </div>
-            <div className='card-component'>
-                <label>From:</label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>From:</label>
                 <p>{from}</p>
-            </div>
-            <div className='card-component'>
-                <label>To:</label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>To:</label>
                 <p>{to}</p>
-            </div>
-            <div className='card-component'>
-                <label>Combined Tickets' cost:</label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>Combined Tickets' cost:</label>
                 <p>€{round(sum, 2)}</p>
-            </div>
-            <div className='card-component'>
-                <label>First flight start: </label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>First flight start: </label>
                 <p>{start.toLocaleDateString('en-GB', options)}</p>
-            </div>
-            <div className='card-component'>
-                <label>Last flight end:</label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>Last flight end:</label>
                 <p>{end.toLocaleDateString('en-GB', options)}</p>
-            </div>
-            <div className='card-component'>
-                <label>Total flight time:</label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>Total flight time:</label>
                 <p>{travelTime}</p>
-            </div>
-            <div className='card-component'>
-                <label>Travel routes:</label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>Travel routes:</label>
                 {flightFromTos.map((flight) =>
                     <p key={flight.flightFrom}>{flight.flightFrom} - {flight.flightTo}</p>
                 )}
-            </div>
-            <div className='card-component'>
-                <label>Combined travel distance:</label>
+            </span>
+            <span className='card-component'>
+                <label className='label'>Combined travel distance:</label>
                 <p>{sum2} km</p>
-            </div>
+            </span>
         </div>
     );
 };

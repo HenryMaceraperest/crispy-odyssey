@@ -10,10 +10,31 @@
     position: relative;
     transition: all .5s ease;
 
+    @media screen and (max-width:800px) {
+        width: 70vw;
+        margin: 0;
+        flex-direction: column;
+        text-align: center;
+        margin-left: 5vw;
+        border-radius: 15px;
+        margin-bottom: 1vh;
+    }
+
+    .detail-label {
+        @media screen and (max-width:800px) {
+            margin: 0;
+        }
+    }
+
 
     .view-text {
         font-size: 25px;
         margin-left: 10vw;
+
+        @media screen and (max-width:800px) {
+            margin-left: 0;
+            font-size: 15px;
+        }
     }
 
     &:hover {

@@ -12,6 +12,11 @@ export const selectIsHistoryOpen = createSelector(
     (history) => history.isHistoryOpen
 );
 
+export const selectIsMenuOpen = createSelector(
+    [selectHistoryReducer],
+    (history) => history.isMenuOpen
+);
+
 export const selectHistoryCount = createSelector(
     [selectHistoryItems],
     (historyItems) => historyItems.reduce((total, historyItem) => total + historyItem.quantity, 0)

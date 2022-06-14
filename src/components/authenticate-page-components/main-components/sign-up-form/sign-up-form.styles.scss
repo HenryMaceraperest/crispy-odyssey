@@ -1,7 +1,14 @@
-.sign-up-container{
+.sign-up-container {
     display: flex;
     flex-direction: column;
     width: 35vw;
+
+    @media screen and (max-width: 800px) {
+        width: auto;
+        margin-top: 50px;
+        text-align: center;
+        justify-content: center;
+    }
 
     h2 {
         margin: 10px 0;

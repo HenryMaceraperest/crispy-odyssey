@@ -3,6 +3,8 @@ import { createAction } from "../../utils/reducer/reducer.utils";
 
 export const setIsHistoryOpen = (boolean) => createAction(HISTORY_ACTION_TYPES.SET_IS_HISTORY_OPEN, boolean);
 
+export const setIsMenuOpen = (boolean) => createAction(HISTORY_ACTION_TYPES.SET_IS_MENU_OPEN, boolean);
+
 const addHistoryItem = (historyItems, flightToAdd) => {
     const existingHistoryItem = historyItems.find((historyItem) => historyItem.id === flightToAdd.id);
     if (existingHistoryItem) {
