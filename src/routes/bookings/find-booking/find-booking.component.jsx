@@ -6,7 +6,7 @@ import { db } from "../../../utils/firebase/firebase.utils";
 
 import './find-booking.styles.scss';
 
-// component that displays a booking based on the last name & the random booking ID
+/** Component that displays a booking based on the last name & the random booking ID */
 const FindBookingPage = () => {
     const [lastName, setLastName] = useState('');
     const [bookingID, setBookingID] = useState('');

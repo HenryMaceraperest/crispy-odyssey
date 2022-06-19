@@ -1,5 +1,5 @@
 import './search-container.styles.scss';
-import SearchComponent from '../../main-components/search-component/search-component.component';
+import SearchComponent from '../../small-components/search-component/search-component.component';
 
 const SearchContainer = () => {
     return (

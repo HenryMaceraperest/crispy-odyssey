@@ -8,6 +8,8 @@ import ValidBookingForm from '../../../components/bookings-components/make-booki
 import InvalidBookingForm from '../../../components/bookings-components/make-booking-page-components/main-components/invalid-booking-form/invalid-booking-form.component';
 
 // booking page that checks whether the validUntil date is still earlier than the current date & based on the result shows the page to make the booking or a page that suggests to check for a new flight
+
+/** Component for making and submitting the booking, adds a random ID to the booking data, based on which the user can find the booking without signing in */
 const MakeBookingPage = () => {
     const bookingData = useSelector(selectBookings);
 

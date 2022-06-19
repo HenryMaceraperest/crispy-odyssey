@@ -8,6 +8,7 @@ import SignInForm from '../../components/authenticate-page-components/main-compo
 
 import './authenticate.styles.scss';
 
+/** Authenticate Component, has sign-up and sign-in forms in it */
 const Authenticate = () => {
     const currentUser = useSelector(selectCurrentUser);
     return (<div className='authentication-outer-container'>{!currentUser ?

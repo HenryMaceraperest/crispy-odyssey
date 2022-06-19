@@ -5,6 +5,7 @@ import { timeDiff } from '../../../../utils/calculate-time-difference/time-diffe
 import './separate-connecting-flights-card.styles.scss';
 
 // Flights card that is for connecting-flights, shows details for each individual flight, without the possibility to book separately
+/** Component that takes only the parameter {flight} and deconstructs it to display all the data of the flight */
 const SeparateConnectingFlightsCard = ({ flight }) => {
     const { company, price, flightStart, flightEnd, distance, flightFrom, flightTo } = flight;
     const start = new Date(flightStart);

@@ -11,6 +11,7 @@ import { timeDiff } from '../../../../utils/calculate-time-difference/time-diffe
 import './combined-connecting-flights-card.styles.scss';
 
 // For a connecting-flights flight, adds up all the data to provide a combined overview of all the travel time, cost etc.
+/** Component that takes three arguments: flights(all of the flights in the connecting flight), from(planet form which the first flight takes place), to(last planet that is the final destination) */
 const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
 
     const navigate = useNavigate();

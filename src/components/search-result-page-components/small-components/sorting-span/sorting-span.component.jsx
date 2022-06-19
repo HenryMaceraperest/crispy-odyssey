@@ -1,5 +1,6 @@
 import './sorting-span.styles.scss';
 
+/** Component that takes 5 parameters: title(which is the title of the sorting-type), onClick1(the function for the first button's click), text1(text/description for the first button), onClick2(the function for the second button's click), text2(the text/description for the second button) */
 const SortingSpan = ({ title, onClick1, onClick2, text1, text2 }) => {
 
     return (

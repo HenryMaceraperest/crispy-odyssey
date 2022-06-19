@@ -23,13 +23,13 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth();
 
-// firebase function to cause a popup for signing in with google
+/** firebase function to cause a popup for signing in with google */
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore(firebaseApp);
 
-// firebase function that checks if user is authenticated, and then allows access to user data (email, displayName, etc.)
+/** firebase function that checks if user is authenticated, and then allows access to user data (email, displayName, etc.) */
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
 
     if (!userAuth) return;
@@ -51,21 +51,21 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     return userSnapshot;
 };
 
-// firebase function that allows creating a user with email & password
+/** firebase function that allows creating a user with email & password */
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
 
     return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-// firebase function that allows to sign in with email & password
+/** firebase function that allows to sign in with email & password */
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
 
     return await signInWithEmailAndPassword(auth, email, password);
 };
 
-// firebase function to sign out the user & not have access to the user object
+/** firebase function to sign out the user & not have access to the user object */
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);

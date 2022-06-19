@@ -5,6 +5,7 @@ import CombinedConnectingFlightsCard from '../../small-components/combined-conne
 import './connecting-flight-card.styles.scss';
 
 // Connecting Flight Card, uses two components to view details of the connecting flights, SeparateConnectingFlightsCard maps through the flights, viewing each flight data separately, then CombinedConnectingFlightsCard calculates and adds up all the data
+/** Component that takes three parameters: flights(the flights array), from(starting planet's name), to(destination planet's name). It maps through the array to display all the connecting flights separately, and then shows the combined data of the flights */
 const ConnectingFlightCard = ({ flights, from, to }) => {
     return (
         <div className='connecting-flights-wrapper'>

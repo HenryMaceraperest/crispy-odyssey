@@ -5,6 +5,7 @@ import { selectRoutes } from '../../store/route/route.selector';
 import { setRoutes } from '../../store/route/route.action';
 import FlightCard from '../../components/direct-flights-page-components/main-components/flight-card/flight-card.component';
 
+/** Component that displays the direct flights */
 const DirectFlights = () => {
     const dispatch = useDispatch();
 

@@ -14,8 +14,8 @@ import SortingSpan from "../../components/search-result-page-components/small-co
 import { setValidity } from "../../store/validity/validity.action";
 
 
-// SEARCH RESULT PAGE, checks whether the flight is a direct flight or connecting flight, based on the from and to locations
 // If the result is a direct flight, the user can sort the results based on different data & filter based on the company name
+/** SEARCH RESULT PAGE, checks whether the flight is a direct flight or connecting flight, based on the from and to locations */
 const SearchResult = () => {
     const [OGflights, setOGFlights] = useState([]);
     const location = useLocation();
@@ -91,37 +91,44 @@ const SearchResult = () => {
         flight.travelTimeMS = travelTimeMS;
     });
 
+    /** Sorts the flights array based on the travel time, descending */
     const sortTravelTimeClickHandlerDesc = () => {
         const sortedFlights = [...OGflights].sort((a, b) => parseFloat(b.travelTimeMS) - parseFloat(a.travelTimeMS));
         setOGFlights(sortedFlights)
     };
 
+    /** Sorts the flights array based on the travel time, ascending */
     const sortTravelTimeClickHandlerAsc = () => {
         const sortedFlights = [...OGflights].sort((a, b) => parseFloat(a.travelTimeMS) - parseFloat(b.travelTimeMS));
         setOGFlights(sortedFlights)
     };
 
+    /** Sorts the flights array based on the travel start date, descending */
     const sortDateClickHandlerDesc = () => {
         const sortedFlights = [...OGflights].sort((a, b) => { return new Date(a.flightStart) - new Date(b.flightStart) });
         setOGFlights(sortedFlights)
     };
 
+    /** Sorts the flights array based on the travel start date, ascending */
     const sortDateClickHandlerAsc = () => {
         const sortedFlights = [...OGflights].sort((a, b) => { return new Date(b.flightStart) - new Date(a.flightStart) });
         setOGFlights(sortedFlights)
     };
 
+    /** Sorts the flights array based on the price, descending */
     const sortPriceClickHandlerDesc = () => {
         const sortedFlights = [...OGflights].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
         setOGFlights(sortedFlights)
     };
 
+    /** Sorts the flights array based on the price, ascending */
     const sortPriceClickHandlerAsc = () => {
         const sortedFlights = [...OGflights].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         setOGFlights(sortedFlights)
     };
     const [searchTerm, setSearchTerm] = useState('');
 
+    // checks if the searchTerm is included in the companies' names.
     const flights = OGflights.filter(flight => flight.company.name.toLowerCase().includes(searchTerm));
 
     const onSearchChange = (event) => { setSearchTerm(event.target.value.toLowerCase()) };
