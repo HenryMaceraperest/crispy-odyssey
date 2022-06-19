@@ -9,6 +9,7 @@ import BookingCardData from "../../small-components/booking-card-data/booking-ca
 
 import './single-booking-card.styles.scss';
 
+/** Singular view for the booking, also has component for a QR code, that takes the user to the same page aka for checking the legidity of the ticket/booking */
 const SingleBookingCard = ({ booking, id }) => {
     const { from, to, distance, startDate, endDate, flightDuration, cost, company, flightRoutes, firstName, lastName, bookingID } = booking;
 
@@ -22,7 +23,7 @@ const SingleBookingCard = ({ booking, id }) => {
         currentUser ? navigate('/mybookings') : navigate('/')
     }
 
-    const encodedURI = encodeURIComponent(`http://localhost:3000/viewbooking?last-name=${lastName}&bookingID=${bookingID}`)
+    const encodedURI = encodeURIComponent(`https://lambent-biscuit-216fe3.netlify.app/viewbooking?last-name=${lastName}&bookingID=${bookingID}`)
     return (
         <div className="outer-container">
             <div className="single-booking-container">

@@ -9,6 +9,7 @@ import BookingDataElement from "../../small-components/booking-data-element/book
 
 import './valid-booking-form.styles.scss';
 
+/** BookingForm that is displayed and can be submitted while the validUntil date-time is earlier than the current date-time & it submits the booking to a firebase database */
 const ValidBookingForm = () => {
 
     const bookingData = useSelector(selectBookings);

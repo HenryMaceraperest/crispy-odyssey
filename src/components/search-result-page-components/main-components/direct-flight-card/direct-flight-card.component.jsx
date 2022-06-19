@@ -6,9 +6,11 @@ import { addFlight } from '../../../../store/history/history.action';
 import { selectHistoryItems } from '../../../../store/history/history.selector';
 import { selectValidity } from '../../../../store/validity/validity.selector';
 import { addBooking } from '../../../../store/booking/booking.action';
+import { timeDiff } from '../../../../utils/calculate-time-difference/time-difference.utils';
 
 import './direct-flight-card.styles.scss';
 
+// Shows all direct flights & their data, on click takes to the booking form & adds booking data to the history component
 const DirectFlightCard = ({ flight, from, to }) => {
     const { id, company, price, flightStart, flightEnd, distance } = flight;
     const start = new Date(flightStart);
@@ -22,24 +24,6 @@ const DirectFlightCard = ({ flight, from, to }) => {
     const goToBookHandler = () => {
         navigate('/book');
     }
-
-    function timeDiff(arrival, departure) {
-        let diffInMillisecs = Math.abs(arrival - departure) / 1000;
-
-        const days = Math.floor(diffInMillisecs / 86400);
-        const hours = Math.floor(diffInMillisecs / 3600) % 24;
-        const minutes = Math.floor(diffInMillisecs / 60) % 60;
-
-        let difference = '';
-        if (days > 0) {
-            difference += (days === 1) ? `${days} day, ` : `${days} days, `;
-        }
-        difference += (hours === 0 || hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
-
-        difference += (minutes === 0 || minutes === 1) ? `${minutes} minute` : `${minutes} minutes`;
-
-        return difference;
-    };
 
     const travelTime = timeDiff(end, start);
     const validity = useSelector(selectValidity);

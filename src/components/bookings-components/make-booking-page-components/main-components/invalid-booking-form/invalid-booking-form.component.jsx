@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectBookings } from "../../../../../store/booking/booking.selector";
 import BookingDataElement from "../../small-components/booking-data-element/booking-data-element.component";
 
+/** BookingForm that displays when the validUntil date has passed, so the user cant make another booking with this data */
 const InvalidBookingForm = () => {
     const bookingData = useSelector(selectBookings);
     const { flightFromTos, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;

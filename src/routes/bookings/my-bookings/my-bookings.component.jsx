@@ -9,6 +9,7 @@ import { selectCurrentUser } from "../../../store/user/user.selector";
 
 import './my-bookings.styles.scss';
 
+// page component that gets all the bookings from the database that are associated with the email of the current user, CAN BE VIEWED ONLY WHEN SIGNED IN
 const MyBookingsPage = () => {
 
     const [bookings, setBookings] = useState([]);

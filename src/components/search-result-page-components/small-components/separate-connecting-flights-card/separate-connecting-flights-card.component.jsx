@@ -1,31 +1,15 @@
 import React from 'react';
 
+import { timeDiff } from '../../../../utils/calculate-time-difference/time-difference.utils';
+
 import './separate-connecting-flights-card.styles.scss';
 
+// Flights card that is for connecting-flights, shows details for each individual flight, without the possibility to book separately
 const SeparateConnectingFlightsCard = ({ flight }) => {
     const { company, price, flightStart, flightEnd, distance, flightFrom, flightTo } = flight;
     const start = new Date(flightStart);
     const end = new Date(flightEnd);
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-
-
-    function timeDiff(arrival, departure) {
-        let diffInMillisecs = Math.abs(arrival - departure) / 1000;
-
-        const days = Math.floor(diffInMillisecs / 86400);
-        const hours = Math.floor(diffInMillisecs / 3600) % 24;
-        const minutes = Math.floor(diffInMillisecs / 60) % 60;
-
-        let difference = '';
-        if (days > 0) {
-            difference += (days === 1) ? `${days} day, ` : `${days} days, `;
-        }
-        difference += (hours === 0 || hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
-
-        difference += (minutes === 0 || minutes === 1) ? `${minutes} minute` : `${minutes} minutes`;
-
-        return difference;
-    };
 
     const travelTime = timeDiff(end, start);
 

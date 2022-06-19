@@ -7,21 +7,24 @@ import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../..
 
 import './sign-in-form.styles.scss';
 
+// sign-in is with email & password
 const defaultFormFields = {
     email: '',
     password: ''
 };
 
-
+/** Sign-in component that allows the user to sign in with email & password || with google pop-up authentication */
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
+    // resetFormFields to handle the form fields after submitting
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
     };
 
 
+    // a function from firebase, which provides a google login popup
     const signInWithGoogle = async () => {
         await signInWithGooglePopup();
     };
@@ -44,6 +47,7 @@ const SignInForm = () => {
     const handleChange = (event) => {
         const { name, value } = event.target;
 
+        // useState for the email and password
         setFormFields({ ...formFields, [name]: value })
     }
 

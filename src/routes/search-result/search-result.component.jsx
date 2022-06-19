@@ -9,9 +9,13 @@ import DirectFlightCard from "../../components/search-result-page-components/mai
 import ConnectingFlightCard from "../../components/search-result-page-components/main-components/connecting-flight-card/connecting-flight-card.component";
 import Custom400Error from "../../components/common-components/main-components/custom-error-400-page/custom-400.component";
 import ChangeDate from "../../components/search-result-page-components/main-components/change-date/change-date.component";
+import SortingSpan from "../../components/search-result-page-components/small-components/sorting-span/sorting-span.component";
 
 import { setValidity } from "../../store/validity/validity.action";
 
+
+// SEARCH RESULT PAGE, checks whether the flight is a direct flight or connecting flight, based on the from and to locations
+// If the result is a direct flight, the user can sort the results based on different data & filter based on the company name
 const SearchResult = () => {
     const [OGflights, setOGFlights] = useState([]);
     const location = useLocation();
@@ -134,21 +138,9 @@ const SearchResult = () => {
                         <p>Company:</p>
                         <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
                     </span>
-                    <span className='sorting-span'>
-                        <p>Price:</p>
-                        <button className='sorting-button' onClick={sortPriceClickHandlerAsc}>Ascending</button>
-                        <button className='sorting-button' onClick={sortPriceClickHandlerDesc}>Descending</button>
-                    </span>
-                    <span className='sorting-span'>
-                        <p>Date:</p>
-                        <button className='sorting-button' onClick={sortDateClickHandlerAsc}>Later first</button>
-                        <button className='sorting-button' onClick={sortDateClickHandlerDesc}>Earlier first</button>
-                    </span>
-                    <span className='sorting-span'>
-                        <p>Travel time:</p>
-                        <button className='sorting-button' onClick={sortTravelTimeClickHandlerAsc}>Ascending</button>
-                        <button className='sorting-button' onClick={sortTravelTimeClickHandlerDesc}>Descending</button>
-                    </span>
+                    <SortingSpan onClick1={sortPriceClickHandlerAsc} onClick2={sortPriceClickHandlerDesc} title={'Price:'} text1={'Ascending'} text2={'Descending'} />
+                    <SortingSpan onClick1={sortDateClickHandlerAsc} onClick2={sortDateClickHandlerDesc} title={'Date:'} text1={'Later first'} text2={'Earlier first'} />
+                    <SortingSpan onClick1={sortTravelTimeClickHandlerAsc} onClick2={sortTravelTimeClickHandlerDesc} title={'Travel time:'} text1={'Ascending'} text2={'Descending'} />
                 </div>
                 <h2 >{flights.length > 0 ? flights.map(flight =>
                     <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />) : <div className="false-text">{`Sorry, no flights available!`}</div>}</h2>

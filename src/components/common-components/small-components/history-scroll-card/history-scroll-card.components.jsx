@@ -9,6 +9,7 @@ import { addBooking } from '../../../../store/booking/booking.action';
 
 import './history-scroll-card.styles.scss';
 
+/** component that takes an {item} as its state, then based on whether the validUntil time is still valid, lets the user check the booking again, or doesnt */
 const HistoryScrollCard = ({ item }) => {
     const { flightFromTos, flightCompany, from, to, flightDistance, startDate, endDate, travelTime, price, validityDate } = item;
 

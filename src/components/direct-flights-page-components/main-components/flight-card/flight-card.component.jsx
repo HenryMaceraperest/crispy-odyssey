@@ -4,6 +4,7 @@ import './flight-card.styles.scss';
 
 import { DetailLabel } from '../../small-components/detail-label/detail-label.component';
 
+/** Component that takes {flight} as its state, displays the data: from, to, & distance; On click, links to search results without a specific date */
 const FlightCard = ({ flight }) => {
 
     const { from, to, distance } = flight;

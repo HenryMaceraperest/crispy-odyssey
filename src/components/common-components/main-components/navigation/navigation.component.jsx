@@ -14,6 +14,7 @@ import HamburgerOpenIcon from "../../small-components/hamburger-icons/open-hambu
 
 import './navigation.styles.scss';
 
+/** Navbar component, handles all the logic for whether the user is logged in & what to show if it is & also contains history component */
 const Navigation = () => {
     const currentUser = useSelector(selectCurrentUser);
     const isHistoryOpen = useSelector(selectIsHistoryOpen);

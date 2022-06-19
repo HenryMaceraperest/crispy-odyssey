@@ -14,15 +14,18 @@ const defaultFormFields = {
     confirmPassword: '',
 };
 
-
+/** Sign-up component, uses displayName, email & password+confirmPassword to create a new user object & save it to the database if successful */
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
 
+    // handling the field forms after submitting
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
     };
 
+    // submit handler that check if the passwords match, if they do, it checks if the email is already in use or the password is weak/too short
+    // if the submit is successful, it creates an user object & logs the user in
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
@@ -39,6 +42,8 @@ const SignUpForm = () => {
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert('A user with this email already exists!')
+            } else if (error.code === "auth/weak-password") {
+                alert("Password is weak!")
             } else {
                 console.log('User creation encountered an error ', error);
             }

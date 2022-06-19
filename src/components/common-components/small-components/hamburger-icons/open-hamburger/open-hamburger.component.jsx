@@ -6,6 +6,7 @@ import './open-hamburger.styles.scss';
 import { setIsMenuOpen } from '../../../../../store/history/history.action';
 import { selectIsMenuOpen } from '../../../../../store/history/history.selector';
 
+/** Icon for the hamburger menu in mobile view, uses a setter and a selector to check and set whether the icon is open or not */
 const HamburgerOpenIcon = () => {
     const isMenuOpen = useSelector(selectIsMenuOpen);
     const dispatch = useDispatch();

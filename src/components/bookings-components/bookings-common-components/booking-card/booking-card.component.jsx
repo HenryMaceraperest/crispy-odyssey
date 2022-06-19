@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 import './booking-card.styles.scss';
 
-const BookingCard = ({ booking, id }) => {
+
+// BookingCard is a component used to display a specific booking in find-booking.component & to display all bookings made with your email at my-bookings.component
+
+/** BookingCard component, takes 'booking' as props, then deconstructs the different data from booking to display data */
+const BookingCard = ({ booking }) => {
     const { from, to, distance, startDate, endDate, flightDuration, cost, company, flightRoutes, firstName, lastName, bookingID } = booking;
     const navigate = useNavigate()
+
+    // after clicking on the BookingCard, it will navigate to a single view booking card
     const onClickHandler = () => {
         navigate(`/viewbooking?last-name=${lastName}&bookingID=${bookingID}`)
     }

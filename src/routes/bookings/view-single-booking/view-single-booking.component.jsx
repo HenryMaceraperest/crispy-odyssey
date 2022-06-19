@@ -7,6 +7,7 @@ import { db } from "../../../utils/firebase/firebase.utils";
 
 import './view-single-booking.styles.scss';
 
+// Single Booking page, can be viewed whether logged in or not, just need the correct last name & booking ID
 const ViewSingleBookingPage = () => {
     const search = useLocation().search;
     const lastName = new URLSearchParams(search).get('last-name');

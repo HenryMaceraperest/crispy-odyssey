@@ -5,6 +5,7 @@ const BUTTON_TYPE_CLASSES = {
     inverted: 'inverted'
 }
 
+/** Button component that takes children as data, buttonType as the className ( options: google-sign-in || inverted ), and a spread operator otherProps for any other properties on the button */
 const Button = ({ children, buttonType, ...otherProps }) => {
     return <button className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`} {...otherProps}>{children}</button>
 };

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './change-date.styles.scss';
 
+// component that takes the date from the state & then removes or adds 1 day to that day based on the user input
 const ChangeDate = ({ from, to, date }) => {
     const timeNow = new Date();
     const navigate = useNavigate();
