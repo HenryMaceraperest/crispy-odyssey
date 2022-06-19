@@ -44,7 +44,7 @@ const ValidBookingForm = () => {
                 bookingID: randomBookingID,
                 created: Timestamp.now()
             })
-            navigate('/')
+            navigate(`/viewbooking?last-name=${lastName}&bookingID=${randomId}`)
         } catch (e) {
             alert(e)
         }

@@ -9,8 +9,8 @@
     cursor: pointer;
 
     @media screen and (max-width: 800px) {
-        width: 45px;
-        height: 45px;
+        width: 47px;
+        height: 47px;
         position: absolute;
         top: 20px;
         left: 45vw;
@@ -20,6 +20,11 @@
     .icon {
         width: 24px;
         height: 34px;
+
+        @media screen and (max-width: 800px) {
+            width: 26px;
+            height: 34px;
+        }
     }
 
     .item-count {
