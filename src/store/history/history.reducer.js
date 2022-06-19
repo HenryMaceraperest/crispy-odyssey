@@ -2,7 +2,7 @@ import { HISTORY_ACTION_TYPES } from "./history.types";
 
 const INITIAL_STATE = {
     isHistoryOpen: false,
-    isMenuOpen: true,
+    isMenuOpen: false,
     historyItems: [],
     historyCount: 0
 };
