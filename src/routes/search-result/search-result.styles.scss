@@ -1,6 +1,10 @@
 .search-body {
     min-height: 92vh;
 
+    @media screen and (max-width: 800px) {
+        padding: 0 40px;
+    }
+
     .title {
         color: white;
     }

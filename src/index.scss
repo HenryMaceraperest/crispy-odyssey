@@ -11,6 +11,9 @@ body {
   background-size: cover;
   padding: 20px 40px;
 
+  @media screen and (max-width: 800px) {
+    padding: 20px 0;
+  }
 
 }
 
