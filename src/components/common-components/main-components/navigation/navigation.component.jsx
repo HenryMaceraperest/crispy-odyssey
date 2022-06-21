@@ -43,8 +43,8 @@ const Navigation = () => {
                         ''}
                     <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/find-booking'>Find Booking</Link>
                     <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/directflights'>Direct Flights</Link>
-                    {currentUser ? (<span className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} onClick={handleSignOutClick}>Sign Out</span>) :
-                        <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/auth'>Sign In</Link>}
+                    {currentUser ? (<span className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} onClick={handleSignOutClick}>Sign-Out</span>) :
+                        <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/auth'>Sign-In</Link>}
                 </div>
                 <HistoryIcon />
 
