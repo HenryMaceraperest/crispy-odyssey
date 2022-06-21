@@ -1,5 +1,5 @@
 .flight-card-container {
-    max-width: 70vw;
+    width: 90vw;
     border: 1px solid white;
     margin: 3vh 10vw;
     color: white;
@@ -12,7 +12,6 @@
 
     @media screen and (max-width:800px) {
         min-width: 70vw;
-        max-width: 90vw;
         margin: 0;
         flex-direction: column;
         text-align: center;
