@@ -68,12 +68,9 @@ const SearchResult = () => {
                         .then(response => setOGFlights(response.data))
                         .catch(function (error) {
                             if (error.response) {
-                                console.log(error.response.data);
-                                console.log(error.response.status);
                             } else {
                                 console.log('Error', error.message);
                             }
-                            console.log(error.config);
                         });
                 }
             } catch (error) {
