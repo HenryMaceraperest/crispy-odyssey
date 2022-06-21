@@ -62,7 +62,8 @@ const SingleBookingCard = ({ booking, id }) => {
                 </div>
             </div>
             <div className="btn-container">
-                <button className="button" onClick={() => deleteClickHandler()}>Delete</button>
+                {currentUser ?
+                    <button className="button" onClick={() => deleteClickHandler()}>Delete</button> : ''}
             </div>
         </div>
     )
