@@ -21,12 +21,12 @@ const MakeBookingPage = () => {
 
         // using an external service, generates a random ID for each flight booking, every time you refresh/view different flight, it generates a new id
         const getRandomID = async () => {
-            await axios.post(process.env.REACT_APP_RANDOM_ID_API, [
+            await axios.post('https://api.random.org/json-rpc/4/invoke', [
                 {
                     "jsonrpc": "2.0",
                     "method": "generateStrings",
                     "params": {
-                        "apiKey": process.env.REACT_APP_RANDOM_ID_API_KEY,
+                        "apiKey": '8b251143-a233-4436-a5dd-30ec7a9d3be6',
                         "n": 1,
                         "length": 6,
                         "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789",

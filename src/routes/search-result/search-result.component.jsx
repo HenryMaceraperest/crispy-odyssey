@@ -35,7 +35,7 @@ const SearchResult = () => {
 
     useEffect(() => {
         const getData = async () => {
-            await axios.get(process.env.REACT_APP_VALIDUNTIL_API)
+            await axios.get('https://teal-valkyrie-8d414e.netlify.app/time')
                 .then(
                     validity => {
                         dispatch(setValidity(validity.data))
@@ -56,7 +56,7 @@ const SearchResult = () => {
         const fromQuery = new URLSearchParams(search).get('from');
         const toQuery = new URLSearchParams(search).get('to');
         const dateQuery = new URLSearchParams(search).get('date');
-        const API_URL = process.env.REACT_APP_SEARCH_RESULT_API;
+        const API_URL = 'https://teal-valkyrie-8d414e.netlify.app/searchresult';
 
         const fetch = async () => {
             try {
@@ -82,11 +82,10 @@ const SearchResult = () => {
     }, [location]);
 
     [...OGflights].forEach(flight => {
-        var start =
+        const start =
             new Date(flight.flightStart);
-        var end = new Date(flight.flightEnd);
-        var travelTimeMS = end - start;
-        console.log(travelTimeMS)
+        const end = new Date(flight.flightEnd);
+        const travelTimeMS = end - start;
         flight.travelTimeMS = travelTimeMS;
     });
 
