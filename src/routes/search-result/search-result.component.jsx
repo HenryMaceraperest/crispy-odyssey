@@ -81,15 +81,16 @@ const SearchResult = () => {
         fetch();
     }, [location]);
 
-
-    [...OGflights].forEach(flight => {
-        var start =
-            new Date(flight.flightStart);
-        var end = new Date(flight.flightEnd);
-        var travelTimeMS = end - start;
-        console.log(travelTimeMS);
-        flight.travelTimeMS = travelTimeMS;
-    });
+    if (OGflights.length > 0) {
+        [...OGflights].forEach(flight => {
+            var start =
+                new Date(flight.flightStart);
+            var end = new Date(flight.flightEnd);
+            var travelTimeMS = end - start;
+            console.log(travelTimeMS)
+            flight.travelTimeMS = travelTimeMS;
+        })
+    };
 
     /** Sorts the flights array based on the travel time, descending */
     const sortTravelTimeClickHandlerDesc = () => {
