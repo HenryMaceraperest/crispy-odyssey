@@ -81,6 +81,7 @@ const SearchResult = () => {
         fetch();
     }, [location]);
 
+
     OGflights.forEach(flight => {
         const start =
             new Date(flight.flightStart);
