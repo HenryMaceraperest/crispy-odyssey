@@ -20,7 +20,7 @@ const SearchComponent = () => {
     const Jupiter = ['Earth', 'Mars', 'Mercury', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
     const Mars = ['Earth', 'Jupiter', 'Mercury', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
     const Mercury = ['Earth', 'Jupiter', 'Mars', 'Neptune', 'Saturn', 'Uranus', 'Venus'];
-    const Neptune = ['Earth', 'Jupiter', 'Mars', 'Mercury', 'Saturn', 'Uranus', 'Venus'];
+    const Neptune = ['Earth', 'Jupiter', 'Mercury', 'Saturn', 'Uranus', 'Venus'];
     const Saturn = ['Earth', 'Jupiter', 'Mars', 'Mercury', 'Neptune', 'Uranus', 'Venus'];
     const Uranus = ['Earth', 'Jupiter', 'Mars', 'Mercury', 'Neptune', 'Saturn', 'Venus'];
     const Venus = ['Earth', 'Jupiter', 'Mars', 'Mercury', 'Neptune', 'Saturn', 'Uranus'];

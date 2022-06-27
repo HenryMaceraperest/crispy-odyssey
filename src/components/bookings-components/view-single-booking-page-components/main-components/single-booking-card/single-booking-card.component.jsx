@@ -11,7 +11,7 @@ import './single-booking-card.styles.scss';
 
 /** Singular view for the booking, also has component for a QR code, that takes the user to the same page aka for checking the legidity of the ticket/booking */
 const SingleBookingCard = ({ booking, id }) => {
-    const { from, to, distance, startDate, endDate, flightDuration, cost, company, flightRoutes, firstName, lastName, bookingID } = booking;
+    const { from, to, distance, startDate, endDate, flightDuration, cost, company, flightRoutes, firstName, lastName, bookingID, email } = booking;
 
     const navigate = useNavigate();
     const currentUser = useSelector(selectCurrentUser);
@@ -62,7 +62,7 @@ const SingleBookingCard = ({ booking, id }) => {
                 </div>
             </div>
             <div className="btn-container">
-                {currentUser ?
+                {currentUser && currentUser.email === email ?
                     <button className="button" onClick={() => deleteClickHandler()}>Delete</button> : ''}
             </div>
         </div>

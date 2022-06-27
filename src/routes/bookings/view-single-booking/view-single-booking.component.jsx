@@ -33,7 +33,7 @@ const ViewSingleBookingPage = () => {
         )
     } else {
         return (
-            <div>No booking was found.</div>
+            <div className="booking-text">No booking was found.</div>
         )
     }
 
