@@ -19,6 +19,9 @@ const removeFlight = (historyItems, flightToRemove) => {
 
 export const addFlight = (historyItems, flightToAdd) => {
     const newHistoryItems = addHistoryItem(historyItems, flightToAdd);
+    if (historyItems.length >= 15) {
+        newHistoryItems.shift()
+    }
     return createAction(HISTORY_ACTION_TYPES.SET_HISTORY_ITEMS, newHistoryItems);
 };
 
