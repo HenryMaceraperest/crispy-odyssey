@@ -7,6 +7,11 @@
 
     .title {
         color: white;
+        margin: 0 7vw;
+
+        @media screen and (max-width:1142px) {
+            margin: 0;
+        }
     }
 
     .sorting-div {
@@ -26,7 +31,7 @@
             height: 100%;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: center;
             color: rgba(255, 255, 255, 0.623);
 
             @media screen and (max-width: 1142px) {
