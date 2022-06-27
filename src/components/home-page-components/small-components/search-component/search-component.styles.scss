@@ -13,7 +13,7 @@
     overflow: hidden;
     margin-top: 30vh;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 980px) {
         margin-top: 5vh;
         flex: auto;
         border-radius: 10px;
@@ -31,7 +31,7 @@
         background-position: center;
         opacity: 0.8;
 
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: 980px) {
             height: 100vh;
             width: auto;
         }
@@ -50,7 +50,7 @@
         justify-content: space-between;
         flex-direction: row;
 
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: 980px) {
             flex-direction: column;
             height: auto;
             background-color: rgba(255, 255, 255, 0);
@@ -64,7 +64,7 @@
             font-size: 22px;
             color: black;
 
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 980px) {
                 font-size: 1rem;
                 color: white;
                 margin-top: 15px;
@@ -75,7 +75,7 @@
         .search-from {
             margin-right: 50px;
 
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 980px) {
                 margin-right: 0;
             }
 
@@ -88,7 +88,7 @@
         .search-to {
             margin-right: 50px;
 
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 980px) {
                 margin-right: 0;
             }
 
@@ -101,7 +101,7 @@
         .search-date {
             margin-right: 50px;
 
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 980px) {
                 margin-right: 0;
             }
 
@@ -123,7 +123,7 @@
             box-shadow: 0 2px 2px -2px gray;
             transition: top ease 0.3s;
 
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 980px) {
                 left: 0;
             }
 
