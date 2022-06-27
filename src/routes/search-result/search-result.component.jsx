@@ -82,7 +82,7 @@ const SearchResult = () => {
     }, [location]);
 
 
-    OGflights.forEach(flight => {
+    [...OGflights].forEach(flight => {
         const start =
             new Date(flight.flightStart);
         const end = new Date(flight.flightEnd);
