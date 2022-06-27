@@ -16,7 +16,7 @@
         justify-content: space-between;
         margin-bottom: 25px;
 
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width:1142px) {
             flex-direction: column;
             min-width: 70vw;
         }
@@ -29,9 +29,9 @@
             justify-content: flex-end;
             color: rgba(255, 255, 255, 0.623);
 
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 1142px) {
                 width: 100%;
-                justify-content: space-between;
+                justify-content: center;
             }
 
             .sorting-search-box {

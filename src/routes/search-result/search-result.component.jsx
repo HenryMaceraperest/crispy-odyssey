@@ -87,6 +87,7 @@ const SearchResult = () => {
             new Date(flight.flightStart);
         const end = new Date(flight.flightEnd);
         const travelTimeMS = end - start;
+        console.log(typeof travelTimeMS)
         flight.travelTimeMS = travelTimeMS;
     });
 
