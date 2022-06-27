@@ -83,10 +83,10 @@ const SearchResult = () => {
 
 
     [...OGflights].forEach(flight => {
-        const start =
+        var start =
             new Date(flight.flightStart);
-        const end = new Date(flight.flightEnd);
-        var travelTimeMS = end - start;
+        var end = new Date(flight.flightEnd);
+        const travelTimeMS = end - start;
         flight.travelTimeMS = travelTimeMS;
     });
 
