@@ -11,7 +11,7 @@ const DirectFlights = () => {
 
     useEffect(() => {
         const getData = async () => {
-            await fetch(process.env.REACT_APP_ROUTES_API)
+            await fetch('https://teal-valkyrie-8d414e.netlify.app/routes')
                 .then((response) => response.json())
                 .then((result) => dispatch(setRoutes(result)))
                 .catch((error) => console.log("An error occured!" + error))
