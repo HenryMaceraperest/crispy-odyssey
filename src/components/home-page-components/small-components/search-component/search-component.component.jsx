@@ -79,7 +79,7 @@ const SearchComponent = () => {
                     <h2>DATE</h2>
                     <input className='form-input' type="date" value={date} onChange={(e) => { setDate(e.target.value) }} />
                 </div>
-                <Link className='button-button' to={!date ? '#' : `/search?from=${from}&to=${to}&date=${date}`}>Search</Link>
+                <Link className='button-button' to={!date || !to ? '#' : `/search?from=${from}&to=${to}&date=${date}`}>Search</Link>
             </form>
         </div>
     )
