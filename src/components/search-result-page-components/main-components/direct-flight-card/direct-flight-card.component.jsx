@@ -18,7 +18,7 @@ const DirectFlightCard = ({ flight, from, to }) => {
     const end = new Date(flightEnd);
     const dispatch = useDispatch();
 
-    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    let options = { timeZone: 'UTC', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const DirectFlightCard = ({ flight, from, to }) => {
 
 
     return (
-        <div className='card-wraper' onClick={historyClickHandler}>
+        <div className='card-wrapper' onClick={historyClickHandler}>
             <div className='card-component'>
                 <p>&#x1F680; {company.name}</p>
             </div>
@@ -51,6 +51,9 @@ const DirectFlightCard = ({ flight, from, to }) => {
             <div className='card-component'>
                 <p>{distance} km</p>
                 <p>{travelTime}</p>
+            </div>
+            <div className='card-component'>
+                <p>{from} - {to}</p>
             </div>
             <div className='card-component-price'>
                 <p className='price-text'>€ {price}</p>

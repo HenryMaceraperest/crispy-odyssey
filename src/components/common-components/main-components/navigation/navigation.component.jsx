@@ -39,10 +39,11 @@ const Navigation = () => {
                 <Link className="logo-container" to='/'><NavLogo className="logo" /></Link>
                 <HamburgerOpenIcon onClick={toggleIsMenuOpen} />
                 <div className="nav-links-container">
+                    <div className={`nav-link ${isMenuOpen ? 'mobile-open-display-name' : ''}`} style={{ cursor: 'default' }}>{currentUser ? `${currentUser.displayName}` : ''}</div>
                     {currentUser ? (<Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/mybookings'>My bookings</Link>) :
                         ''}
                     <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/find-booking'>Find Booking</Link>
-                    <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/directflights'>Direct Flights</Link>
+                    <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/viewflights'>View Flights</Link>
                     {currentUser ? (<span className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} onClick={handleSignOutClick}>Sign-Out</span>) :
                         <Link onClick={handleNavClick} className={`nav-link ${isMenuOpen ? 'mobile-open-nav-link' : ''}`} to='/auth'>Sign-In</Link>}
                 </div>

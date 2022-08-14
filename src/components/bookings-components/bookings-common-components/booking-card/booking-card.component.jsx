@@ -51,7 +51,7 @@ const BookingCard = ({ booking }) => {
                     </div>
                     <div className="flight-routes">
                         <div>{flightRoutes ? <p className="flight-data">Routes:</p> : ''}</div>
-                        <div>{flightRoutes ? flightRoutes.map(flightRoute => <p className="flight-data">{flightRoute.flightFrom} - {flightRoute.flightTo}</p>) : ''}</div>
+                        <div>{flightRoutes ? flightRoutes.map(flightRoute => <p className="flight-data">{flightRoute.from} - {flightRoute.to}</p>) : ''}</div>
                     </div>
                 </div>
             </div>

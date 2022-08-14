@@ -5,7 +5,8 @@ import './change-date.styles.scss';
 // component that takes the date from the state & then removes or adds 1 day to that day based on the user input
 /** Component that takes three parameters: from(starting planet's name), to(destination planet's name), date(the date which will be used to calculate 1 day earlier or 1 day later) */
 const ChangeDate = ({ from, to, date }) => {
-    const timeNow = new Date();
+    const timeNow = new Date(new Date().setHours(3, 1, 0))
+    timeNow.setDate(timeNow.getDate() + 1)
     const navigate = useNavigate();
 
     const oldDate1 = new Date(date);
@@ -29,7 +30,7 @@ const ChangeDate = ({ from, to, date }) => {
 
     return (
         <div className='main-div'>
-            {timeNow < oldDate1 ? <button className='button' onClick={() => previousDayClickHandler()}>Previous day, {previousDate}</button> : ''}
+            {oldDate1 >= timeNow ? <button className='button' onClick={() => previousDayClickHandler()}>Previous day, {previousDate}</button> : ''}
             <button className='button' onClick={() => nextDayClickHandler()}>Next day, {nextDate}</button>
         </div>
     )

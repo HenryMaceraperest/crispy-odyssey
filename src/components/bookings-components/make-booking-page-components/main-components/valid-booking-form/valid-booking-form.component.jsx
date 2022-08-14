@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 
 import { selectBookings, selectBookingID } from "../../../../../store/booking/booking.selector";
+import { selectCurrentUser } from "../../../../../store/user/user.selector";
 import { db } from "../../../../../utils/firebase/firebase.utils";
 import BookingDataElement from "../../small-components/booking-data-element/booking-data-element.component";
 
@@ -15,9 +16,10 @@ const ValidBookingForm = () => {
     const bookingData = useSelector(selectBookings);
     const { flightFromTos, from, to, flightDistance, startDate, endDate, travelTime, price, flightCompany } = bookingData;
 
+    const currentUser = useSelector(selectCurrentUser);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(currentUser ? currentUser.email : '');
     const [randomBookingID, setRandomBookingID] = useState('');
 
     const randomId = useSelector(selectBookingID);
@@ -63,13 +65,13 @@ const ValidBookingForm = () => {
                 <label htmlFor="company-name" className='form-label'>Company name(s): </label>
                 <div className='form-data'>{flightCompany.map(x => <p key={x}>{x}</p>)}</div>
                 {flightFromTos ? <div><label htmlFor="routes" className='form-label'>Routes: </label>
-                    <div className='form-data'>{flightFromTos.map(flight => <p key={flight.flightFrom}>{flight.flightFrom} - {flight.flightTo}</p>)}</div></div> : ''}
+                    <div className='form-data'>{flightFromTos.map(flight => <p key={flight.from}>{flight.from} - {flight.to}</p>)}</div></div> : ''}
                 <label htmlFor="first-name" className='form-label'>First name(s): </label>
                 <input className='form-input' type="text" name="first-name" id="first-name" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} />
                 <label htmlFor="last-name" className='form-label'>Last name(s): </label>
                 <input className='form-input' type="text" name="last-name" id="last-name" value={lastName} onChange={(e) => { setLastName(e.target.value) }} />
                 <label htmlFor="email" className='form-label'>Email: </label>
-                <input className='form-input' type="email" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} />
+                <input value={email} className='form-input' type="email" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} />
             </div>
             <button className='form-button' type='submit' onClick={() =>
                 setRandomBookingID(randomId)}>Book Flight!</button>

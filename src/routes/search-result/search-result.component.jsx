@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
 
 import './search-result.styles.scss';
@@ -9,13 +9,13 @@ import DirectFlightCard from "../../components/search-result-page-components/mai
 import ConnectingFlightCard from "../../components/search-result-page-components/main-components/connecting-flight-card/connecting-flight-card.component";
 import Custom400Error from "../../components/common-components/main-components/custom-error-400-page/custom-400.component";
 import ChangeDate from "../../components/search-result-page-components/main-components/change-date/change-date.component";
+import capitalizeFirst from "../../utils/capitalizeFirst";
 import SortingSpan from "../../components/search-result-page-components/small-components/sorting-span/sorting-span.component";
 
 import { setValidity } from "../../store/validity/validity.action";
+import { setRoutes } from "../../store/route/route.action";
+import { selectRoutes } from "../../store/route/route.selector";
 
-
-// If the result is a direct flight, the user can sort the results based on different data & filter based on the company name
-/** SEARCH RESULT PAGE, checks whether the flight is a direct flight or connecting flight, based on the from and to locations */
 const SearchResult = () => {
     const [OGflights, setOGFlights] = useState([]);
     const location = useLocation();
@@ -23,19 +23,14 @@ const SearchResult = () => {
     const fromQuery = new URLSearchParams(search).get('from');
     const toQuery = new URLSearchParams(search).get('to');
     const dateQuery = new URLSearchParams(search).get('date');
-
-    /* const dateIsValid = dateQuery instanceof Date && !!dateQuery.getDate();
-
-    if (!dateIsValid) {
-        dateQuery = new Date().toISOString().split('T')[0];
-    } */
+    const locations = [];
 
     const dispatch = useDispatch();
 
 
     useEffect(() => {
         const getData = async () => {
-            await axios.get('https://teal-valkyrie-8d414e.netlify.app/time')
+            await axios.get(process.env.REACT_APP_VALIDUNTIL_API)
                 .then(
                     validity => {
                         dispatch(setValidity(validity.data))
@@ -51,12 +46,36 @@ const SearchResult = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        const getData = async () => {
+            await fetch(process.env.REACT_APP_ROUTES_API)
+                .then((response) => response.json())
+                .then((result) => dispatch(setRoutes(result)))
+                .catch((error) => console.log("An error occured!" + error))
+
+        };
+
+        getData();
+
+    }, [dispatch]);
+
+    const products = useSelector(selectRoutes);
+
+    for (let location of products) {
+        if (!locations.includes(location.from.name)) {
+            locations.push(location.from.name.toLowerCase())
+        }
+        if (!locations.includes(location.to.name)) {
+            locations.push(location.to.name.toLowerCase())
+        }
+    }
+
+    useEffect(() => {
         const search = location.search;
 
-        const fromQuery = new URLSearchParams(search).get('from');
-        const toQuery = new URLSearchParams(search).get('to');
+        const fromQuery = capitalizeFirst(new URLSearchParams(search).get('from'));
+        const toQuery = capitalizeFirst(new URLSearchParams(search).get('to'));
         const dateQuery = new URLSearchParams(search).get('date');
-        const API_URL = 'https://teal-valkyrie-8d414e.netlify.app/searchresult';
+        const API_URL = process.env.REACT_APP_SEARCH_RESULT_API;
 
         const fetch = async () => {
             try {
@@ -81,12 +100,39 @@ const SearchResult = () => {
         fetch();
     }, [location]);
 
+    // set the flights data from the api, if it's a direct flight, set the flight data on top level, if connected flight, then combined data on top level
     [...OGflights].forEach(flight => {
-        const start =
-            new Date(flight.flightStart);
-        const end = new Date(flight.flightEnd);
-        const travelTimeMS = end - start;
-        flight.travelTimeMS = travelTimeMS;
+        if (flight.length === 1) {
+            const start = new Date(flight[0].flightStart);
+            const end = new Date(flight[0].flightEnd);
+            const travelTimeMS = end - start;
+            flight.travelTimeMS = travelTimeMS;
+            flight.price = flight[0].price;
+            flight.flightStart = flight[0].flightStart;
+            flight.flightEnd = flight[0].flightEnd;
+            flight.distance = flight[0].distance;
+
+        } else {
+            const start = new Date(flight[0].flightStart);
+            const end = new Date(flight[flight.length - 1].flightEnd);
+            const travelTimeMS = end - start;
+            flight.travelTimeMS = travelTimeMS;
+            let collectionCosts = flight.map((flight) => flight.price);
+            let collectionDistance = flight.map((flight) => flight.distance);
+            let initialValue = 0;
+            const sum = collectionCosts.reduce(
+                (previousValue, currentValue) => previousValue + currentValue,
+                initialValue
+            );
+            const sum2 = collectionDistance.reduce(
+                (previousValue, currentValue) => previousValue + currentValue,
+                initialValue
+            );
+            flight.flightStart = flight[0].flightStart;
+            flight.flightEnd = flight[flight.length - 1].flightEnd;
+            flight.price = sum;
+            flight.distance = sum2;
+        }
     });
 
     /** Sorts the flights array based on the travel time, descending */
@@ -127,42 +173,46 @@ const SearchResult = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     // checks if the searchTerm is included in the companies' names.
-    const flights = OGflights.filter(flight => flight.company.name.toLowerCase().includes(searchTerm));
+    const flights = OGflights.filter(element => element.some(y => y.company.name.toLowerCase().includes(searchTerm)));
 
     const onSearchChange = (event) => { setSearchTerm(event.target.value.toLowerCase()) };
-    const FQ = fromQuery.toLowerCase();
-    const TQ = toQuery.toLowerCase();
 
-    if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
-        return (
-            <div className="search-body">
-                <h1 className="title">From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
-                <div>{dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}</div>
-                <div className='sorting-div'>
-                    <span className='sorting-span'>
-                        <p>Company:</p>
-                        <input className="sorting-search-box" placeholder="Search" type="text" name="company-search" onChange={onSearchChange} />
-                    </span>
-                    <SortingSpan onClick1={sortPriceClickHandlerAsc} onClick2={sortPriceClickHandlerDesc} title={'Price:'} text1={'Ascending'} text2={'Descending'} />
-                    <SortingSpan onClick1={sortDateClickHandlerAsc} onClick2={sortDateClickHandlerDesc} title={'Date:'} text1={'Later first'} text2={'Earlier first'} />
-                    <SortingSpan onClick1={sortTravelTimeClickHandlerAsc} onClick2={sortTravelTimeClickHandlerDesc} title={'Travel time:'} text1={'Ascending'} text2={'Descending'} />
+    return (
+        <div>
+            {!locations.includes(fromQuery.toLowerCase()) || !locations.includes(toQuery.toLowerCase()) ?
+                <Custom400Error smallText={"No flights on these routes!"} bigText={`${fromQuery} - ${toQuery}`} /> :
+                <div className="search-body">
+                    <h1 className="title">From {fromQuery.toUpperCase()} To {toQuery.toUpperCase()}</h1>
+                    <div>
+                        {dateQuery ? <ChangeDate from={fromQuery} to={toQuery} date={dateQuery} /> : ''}
+                    </div>
+                    <div className='sorting-div'>
+                        <span className='sorting-span'>
+                            <p>Company:</p>
+                            <input className="sorting-search-box" placeholder="Search" type="text" onChange={onSearchChange} />
+                        </span>
+                        <SortingSpan onClick1={sortPriceClickHandlerAsc} onClick2={sortPriceClickHandlerDesc} title={'Price:'} text1={'Ascending'} text2={'Descending'} />
+                        <SortingSpan onClick1={sortDateClickHandlerAsc} onClick2={sortDateClickHandlerDesc} title={'Date:'} text1={'Later first'} text2={'Earlier first'} />
+                        <SortingSpan onClick1={sortTravelTimeClickHandlerAsc} onClick2={sortTravelTimeClickHandlerDesc} title={'Travel time:'} text1={'Ascending'} text2={'Descending'} />
+                    </div>
+                    <h2>
+                        {flights.map(flight => {
+                            return <div key={flight[0].id}>{flight.length > 1 ?
+                                <ConnectingFlightCard key={flight[0].id} flights={flight} from={fromQuery} to={toQuery} /> :
+                                <DirectFlightCard key={flight[0].id} flight={flight[0]} from={fromQuery} to={toQuery} />}</div>
+                        })}
+                    </h2>
+                    <h2>
+                        {flights.length === 0 ?
+                            <div className="false-text">Sorry, no flights for these locations right now!</div> :
+                            ''}
+                    </h2>
                 </div>
-                <h2 >{flights.length > 0 ? flights.map(flight =>
-                    <DirectFlightCard key={flight.id} flight={flight} from={fromQuery} to={toQuery} />) : <div className="false-text">{`Sorry, no flights available!`}</div>}</h2>
-            </div>
-        )
-    } else if ((FQ === 'earth' && (TQ === 'mars' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'jupiter' && (TQ === 'earth' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mars' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mercury' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'neptune' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'saturn' || TQ === 'venus')) || (FQ === 'saturn' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'uranus' || TQ === 'venus')) || (FQ === 'uranus' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'mercury' || TQ === 'venus')) || (FQ === 'venus' && (TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus')) || (FQ === 'mercury' && (TQ === 'earth' || TQ === 'jupiter' || TQ === 'mars' || TQ === 'neptune' || TQ === 'saturn' || TQ === 'uranus'))) {
-        return (
-            <h2>{dateQuery ? <div>
-                <div>{<ChangeDate from={fromQuery} to={toQuery} date={dateQuery} />}</div>
-                {flights.length > 0 ? <ConnectingFlightCard key={"unique"} flights={flights} from={fromQuery} to={toQuery} /> : <div className="false-text">{`Sorry, no flights for ${fromQuery} - ${toQuery} on ${dateQuery}!`}</div>} </div> :
-                <Custom400Error bigText={'TRY AGAIN!'} smallText={'FOR CONNECTING FLIGHTS, PLEASE SELECT A DATE!'} />}
-            </h2>
-        )
-    } else
-        return (
-            <Custom400Error bigText={`SORRY, WE DON'T OFFER THESE ROUTES`} smallText={`${fromQuery} => ${toQuery}`} />
-        )
+            }
+        </div>
+
+
+    )
 };
 
 export default SearchResult;

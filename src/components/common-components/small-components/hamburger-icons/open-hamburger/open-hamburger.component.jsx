@@ -12,7 +12,6 @@ const HamburgerOpenIcon = () => {
     const dispatch = useDispatch();
 
     const toggleIsMenuOpen = () => {
-        console.log(isMenuOpen)
         dispatch(setIsMenuOpen(!isMenuOpen))
     }
 

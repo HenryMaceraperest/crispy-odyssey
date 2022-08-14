@@ -34,7 +34,7 @@ const App = () => {
       <Route path='/' element={<Navigation />}>
         <Route index element={<Home />} />
         <Route path='/auth' element={<Authenticate />} />
-        <Route path='/directflights' element={<DirectFlights />} />
+        <Route path='/viewflights' element={<DirectFlights />} />
         <Route path='/search' element={<SearchResult />} />
         <Route path='/book' element={<MakeBookingPage />} />
         <Route path='/find-booking' element={<FindBookingPage />} />
