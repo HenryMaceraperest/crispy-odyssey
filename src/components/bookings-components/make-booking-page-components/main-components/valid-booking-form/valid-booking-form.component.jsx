@@ -67,11 +67,11 @@ const ValidBookingForm = () => {
                 {flightFromTos ? <div><label htmlFor="routes" className='form-label'>Routes: </label>
                     <div className='form-data'>{flightFromTos.map(flight => <p key={flight.from}>{flight.from} - {flight.to}</p>)}</div></div> : ''}
                 <label htmlFor="first-name" className='form-label'>First name(s): </label>
-                <input className='form-input' type="text" name="first-name" id="first-name" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} />
+                <input required className='form-input' type="text" name="first-name" id="first-name" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} />
                 <label htmlFor="last-name" className='form-label'>Last name(s): </label>
-                <input className='form-input' type="text" name="last-name" id="last-name" value={lastName} onChange={(e) => { setLastName(e.target.value) }} />
+                <input required className='form-input' type="text" name="last-name" id="last-name" value={lastName} onChange={(e) => { setLastName(e.target.value) }} />
                 <label htmlFor="email" className='form-label'>Email: </label>
-                <input value={email} className='form-input' type="email" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} />
+                <input required value={email} className='form-input' type="email" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} />
             </div>
             <button className='form-button' type='submit' onClick={() =>
                 setRandomBookingID(randomId)}>Book Flight!</button>
