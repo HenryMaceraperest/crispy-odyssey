@@ -22,7 +22,7 @@
         justify-content: space-between;
         margin-bottom: 25px;
 
-        @media screen and (max-width:1142px) {
+        @media screen and (max-width:1300px) {
             flex-direction: column;
             min-width: 70vw;
         }
@@ -35,7 +35,7 @@
             justify-content: center;
             color: rgba(255, 255, 255, 0.623);
 
-            @media screen and (max-width: 1142px) {
+            @media screen and (max-width: 1300px) {
                 width: 100%;
                 justify-content: center;
             }
@@ -45,9 +45,9 @@
             }
 
             .sorting-button {
-                padding: 10px 15px;
+                padding: 5px 10px;
                 cursor: pointer;
-                margin-left: 15px;
+                margin: 0 10px;
                 color: white;
                 background-color: purple;
                 border: none;

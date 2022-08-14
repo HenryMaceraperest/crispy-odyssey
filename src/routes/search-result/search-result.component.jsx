@@ -170,6 +170,19 @@ const SearchResult = () => {
         const sortedFlights = [...OGflights].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         setOGFlights(sortedFlights)
     };
+
+    /** Sorts the flights array based on the distance, descending */
+    const sortDistanceClickHandlerDesc = () => {
+        const sortedFlights = [...OGflights].sort((a, b) => parseFloat(b.distance) - parseFloat(a.distance));
+        setOGFlights(sortedFlights)
+    };
+
+    /** Sorts the flights array based on the distance, ascending */
+    const sortDistanceClickHandlerAsc = () => {
+        const sortedFlights = [...OGflights].sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+        setOGFlights(sortedFlights)
+    };
+
     const [searchTerm, setSearchTerm] = useState('');
 
     // checks if the searchTerm is included in the companies' names.
@@ -193,7 +206,8 @@ const SearchResult = () => {
                         </span>
                         <SortingSpan onClick1={sortPriceClickHandlerAsc} onClick2={sortPriceClickHandlerDesc} title={'Price:'} text1={'Ascending'} text2={'Descending'} />
                         <SortingSpan onClick1={sortDateClickHandlerAsc} onClick2={sortDateClickHandlerDesc} title={'Date:'} text1={'Later first'} text2={'Earlier first'} />
-                        <SortingSpan onClick1={sortTravelTimeClickHandlerAsc} onClick2={sortTravelTimeClickHandlerDesc} title={'Travel time:'} text1={'Ascending'} text2={'Descending'} />
+                        <SortingSpan onClick1={sortTravelTimeClickHandlerAsc} onClick2={sortTravelTimeClickHandlerDesc} title={'Time:'} text1={'Ascending'} text2={'Descending'} />
+                        <SortingSpan onClick1={sortDistanceClickHandlerAsc} onClick2={sortDistanceClickHandlerDesc} title={'Distance:'} text1={'Ascending'} text2={'Descending'} />
                     </div>
                     <h2>
                         {flights.map(flight => {
