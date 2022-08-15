@@ -13,7 +13,6 @@ import './combined-connecting-flights-card.styles.scss';
 // For a connecting-flights flight, adds up all the data to provide a combined overview of all the travel time, cost etc.
 /** Component that takes three arguments: flights(all of the flights in the connecting flight), from(planet form which the first flight takes place), to(last planet that is the final destination) */
 const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -50,13 +49,15 @@ const CombinedConnectingFlightsCard = ({ flights, from, to }) => {
         initialValue
     );
 
+    let flights_ids = flights.map(flight => flight.id).join('');
+
     const validity = useSelector(selectValidity);
 
     const historyItems = useSelector(selectHistoryItems);
 
     const historyClickHandler = () => {
-        dispatch(addFlight(historyItems, { flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), validityDate: validity, flightCompany: collectionCompanies }));
-        dispatch(addBooking({ validityDate: validity, flightFromTos: flightFromTos, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies }));
+        dispatch(addFlight(historyItems, { flightFromTos: flightFromTos, id: flights_ids, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), validityDate: validity, flightCompany: collectionCompanies }));
+        dispatch(addBooking({ validityDate: validity, flightFromTos: flightFromTos, id: flights_ids, from: from, to: to, flightDistance: sum2, startDate: start.toLocaleDateString('en-GB', options), endDate: end.toLocaleDateString('en-GB', options), travelTime: travelTime, price: round(sum, 2), flightCompany: collectionCompanies }));
         goToBookHandler();
     };
 

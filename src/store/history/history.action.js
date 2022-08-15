@@ -6,6 +6,7 @@ export const setIsHistoryOpen = (boolean) => createAction(HISTORY_ACTION_TYPES.S
 export const setIsMenuOpen = (boolean) => createAction(HISTORY_ACTION_TYPES.SET_IS_MENU_OPEN, boolean);
 
 const addHistoryItem = (historyItems, flightToAdd) => {
+    console.log(flightToAdd.id)
     const existingHistoryItem = historyItems.find((historyItem) => historyItem.id === flightToAdd.id);
     if (existingHistoryItem) {
         return historyItems.map((historyItem) => historyItem.id === flightToAdd.id ? { ...historyItem, quantity: historyItem.quantity = 1 } : historyItem);
