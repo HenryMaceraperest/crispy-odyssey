@@ -12,7 +12,7 @@ import InvalidBookingForm from '../../../components/bookings-components/make-boo
 /** Component for making and submitting the booking, adds a random ID to the booking data, based on which the user can find the booking without signing in */
 const MakeBookingPage = () => {
     const bookingData = useSelector(selectBookings);
-
+    window.scrollTo(0, 0);
     const { validityDate } = bookingData;
 
     const dispatch = useDispatch();
