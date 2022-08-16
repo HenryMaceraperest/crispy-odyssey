@@ -38,7 +38,7 @@ const ChangeDate = ({ from, to, date }) => {
         )
     } else {
         return (
-            <div className="false-date">Invalid date! Here are all flights from {from} to {to}!</div>
+            <div className="false-date">Invalid date! Here are all flights from {from.toUpperCase()} to {to.toUpperCase()}!</div>
         )
     }
 
