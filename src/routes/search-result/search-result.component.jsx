@@ -74,7 +74,12 @@ const SearchResult = () => {
 
         const fromQuery = capitalizeFirst(new URLSearchParams(search).get('from'));
         const toQuery = capitalizeFirst(new URLSearchParams(search).get('to'));
-        const dateQuery = new URLSearchParams(search).get('date');
+        let dateQuery;
+        if (new Date(new URLSearchParams(search).get('date')).getTime()) {
+            dateQuery = new URLSearchParams(search).get('date');
+        } else {
+            dateQuery = null;
+        }
         const API_URL = process.env.REACT_APP_SEARCH_RESULT_API;
 
         const fetch = async () => {

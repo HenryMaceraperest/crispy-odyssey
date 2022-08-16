@@ -9,31 +9,40 @@ const ChangeDate = ({ from, to, date }) => {
     timeNow.setDate(timeNow.getDate() + 1)
     const navigate = useNavigate();
 
-    const oldDate1 = new Date(date);
-    const oldDate2 = new Date(date);
+    let timestamp = Date.parse(date);
+    if (isNaN(timestamp) === false) {
+        const oldDate1 = new Date(date);
+        const oldDate2 = new Date(date);
 
-    //const dateIsValid = date instanceof Date &&  !!date.getDate();
+        //const dateIsValid = date instanceof Date &&  !!date.getDate();
 
-    oldDate1.setDate(oldDate1.getDate() + 1);
-    oldDate2.setDate(oldDate2.getDate() - 1);
+        oldDate1.setDate(oldDate1.getDate() + 1);
+        oldDate2.setDate(oldDate2.getDate() - 1);
 
-    const nextDate = oldDate1.toISOString().split('T')[0];
-    const previousDate = oldDate2.toISOString().split('T')[0];
+        const nextDate = oldDate1.toISOString().split('T')[0];
+        const previousDate = oldDate2.toISOString().split('T')[0];
 
-    const previousDayClickHandler = () => {
-        navigate(`/search?from=${from}&to=${to}&date=${previousDate}`)
-    };
+        const previousDayClickHandler = () => {
+            navigate(`/search?from=${from}&to=${to}&date=${previousDate}`)
+        };
 
-    const nextDayClickHandler = () => {
-        navigate(`/search?from=${from}&to=${to}&date=${nextDate}`)
-    };
+        const nextDayClickHandler = () => {
+            navigate(`/search?from=${from}&to=${to}&date=${nextDate}`)
+        };
 
-    return (
-        <div className='main-div'>
-            {oldDate1 >= timeNow ? <button className='button' onClick={() => previousDayClickHandler()}>Previous day, {previousDate}</button> : ''}
-            <button className='button' onClick={() => nextDayClickHandler()}>Next day, {nextDate}</button>
-        </div>
-    )
+        return (
+            <div className='main-div'>
+                {oldDate1 >= timeNow ? <button className='button' onClick={() => previousDayClickHandler()}>Previous day, {previousDate}</button> : ''}
+                <button className='button' onClick={() => nextDayClickHandler()}>Next day, {nextDate}</button>
+            </div>
+        )
+    } else {
+        return (
+            <div className="false-date">Invalid date! Here are all flights from {from} to {to}!</div>
+        )
+    }
+
+
 }
 
 export default ChangeDate;
